@@ -1,0 +1,23 @@
+<div class="text-layout">
+    <h1>Display "Hide"</h1>
+    <p>
+        Angular Exercise 1
+    </p>
+</div>
+
+<div class="grid">
+    <div class="col">
+        <p-card header="display & hide" >
+            <!-- primeng button -->
+            <button pButton 
+                    label="click"
+                    (click)="toggleImage()"
+                    >
+            </button>
+            <div class="flex-1 flex align-items-center justify-content-center m-2 " >
+                <img *ngIf="hide" src="../../../assets/imgs/helloworld.png" alt="image">
+            </div>
+            
+        </p-card>
+    </div>
+</div>
