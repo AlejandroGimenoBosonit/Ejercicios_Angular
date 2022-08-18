@@ -1,0 +1,23 @@
+<p-fieldset legend="Child" [toggleable]="false">
+    <!-- print messaage -->
+    <p>message: <strong> {{ mssgFromParent }} </strong></p>
+    <!-- Buttons -->
+    <div class="flex">
+        <button pButton 
+                class="flex flex-1 align-items-center justify-content-center m-2" 
+                label="Use Service"
+                (click)="useService()"
+                ></button>
+        <button pButton 
+                class="flex flex-1 align-items-center justify-content-center m-2" 
+                label="Use Input"
+                (click)="useInput()"
+                ></button>
+        <button pButton 
+                class="flex flex-1 align-items-center justify-content-center m-2" 
+                label="Use Observable"
+                (click)="useObservable()"
+                ></button>
+    </div>
+    <!-- child fieldset -->
+</p-fieldset>

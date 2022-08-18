@@ -1,0 +1,32 @@
+<div class="grid">
+    <div class="col">
+        <p-fieldset legend="Parent" [toggleable]="false" class="">
+            <!-- print messaage -->
+            <p>message: <strong> {{ childMssg }} </strong></p>
+            <!-- Buttons -->
+            <div class="flex">
+                <button pButton 
+                        class="flex flex-1 align-items-center justify-content-center m-2" 
+                        label="Use Service"
+                        (click)="useService()"
+                        ></button>
+                <button pButton 
+                        class="flex flex-1 align-items-center justify-content-center m-2" 
+                        label="Use Input"
+                        (click)="useInput()"
+                        ></button>
+                <button pButton 
+                        class="flex flex-1 align-items-center justify-content-center m-2" 
+                        label="Use Observable"
+                        (click)="useObservable()"
+                        ></button>
+            </div>
+            <!-- child fieldset -->
+            <!-- sending by input a message form parent to child -->
+            <app-child 
+            [mssgFromParent]="parentMssg" 
+            (mssgFromChild)="getMssgFromChild($event)"
+            ></app-child>
+        </p-fieldset>
+    </div>
+</div>
