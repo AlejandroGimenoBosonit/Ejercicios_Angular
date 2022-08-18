@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ComunicationObservableService } from 'src/app/services/comunication-observable.service';
 import { ComunicationService } from 'src/app/services/comunication.service';
 
 @Component({
@@ -21,10 +22,21 @@ export class ParentComponent implements OnInit {
   parentMssgObsrv : string = 'PARENT USING OBSERVABLE';
 
   // service injection
-  constructor( private comunicationService: ComunicationService ) { }
+  constructor( 
+      // simple service
+      private comunicationService: ComunicationService,
+      // observable
+      private  comunicationObservableService: ComunicationObservableService
+    ) { }
 
   ngOnInit(): void {
     this.comunicationService.parentComp = this;
+    // subscribe to the observable
+    this.comunicationObservableService
+        .getChildMessage$()
+        .subscribe( (mssg: string) => {
+          this.childMssg = mssg;
+        })
   }
 
   // methods
@@ -46,7 +58,8 @@ export class ParentComponent implements OnInit {
   }
   ///////////////////////////////////////////////////////////////////////////////////////////////
   useObservable() {
-
+    // call observable method
+    this.comunicationObservableService.fromParentToChild( this.parentMssgObsrv );
   }
 
 
