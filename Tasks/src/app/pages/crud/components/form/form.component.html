@@ -1,7 +1,7 @@
 <p-card header="Register Form">
     <hr>
     <div class="row">
-        <div class="col">
+        <div class="col m-3">
             <form [formGroup]="myForm"
                 autocomplete="off"
                 (ngSubmit)="submitForm()">
@@ -89,8 +89,25 @@
                 <!-- Countries & Cities -->
                 <div class="row mb-3">
                     <!-- bootstrap dropdown -->
+                    <p-dropdown [options]="countries" 
+                                 
+                                optionLabel="name"
+                    >
+                    <!-- [(ngModel)]="selectedCity" -->
+                    </p-dropdown>
                 </div>
                 <div class="row mb-3"></div>
+                <!-- Button -->
+                <div class="row">
+                    <div class="col">
+                        <button
+                            [disabled]="myForm.pending"
+                            type="submit" 
+                            class="btn btn-primary float-end">
+                            Submit data
+                        </button>
+                    </div>
+                </div>
             </form>
         </div>
     </div>

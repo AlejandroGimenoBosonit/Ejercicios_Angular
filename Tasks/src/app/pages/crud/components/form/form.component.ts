@@ -9,6 +9,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class FormComponent implements OnInit {
 
+  // countries
+  countries   : string[] = [];
+  selectedCity: string   = '';
+
   // form Group
   myForm: FormGroup = this.fb.group({
     username    : [ '',     [Validators.required] ],
@@ -35,7 +39,7 @@ export class FormComponent implements OnInit {
   }
 
   submitForm() {
-    
+
   }
 
 }
