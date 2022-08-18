@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ComunicationService } from 'src/app/services/comunication.service';
-import { ComunicationObservableService } from '../../../services/comunication-observable.service';
+import { ComunicationService } from 'src/app/pages/comunication/services/comunication.service';
+import { ComunicationObservableService } from '../services/comunication-observable.service';
 
 @Component({
   selector: 'app-child',

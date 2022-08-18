@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ComunicationObservableService } from 'src/app/services/comunication-observable.service';
-import { ComunicationService } from 'src/app/services/comunication.service';
+import { ComunicationObservableService } from 'src/app/pages/comunication/services/comunication-observable.service';
+import { ComunicationService } from 'src/app/pages/comunication/services/comunication.service';
 
 @Component({
   selector: 'app-parent',

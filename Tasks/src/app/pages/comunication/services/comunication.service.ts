@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ParentComponent } from '../pages/comunication/parent/parent.component';
-import { ChildComponent } from '../pages/comunication/child/child.component';
+import { ParentComponent } from '../parent/parent.component';
+import { ChildComponent } from '../child/child.component';
 
 @Injectable({
   providedIn: 'root'
