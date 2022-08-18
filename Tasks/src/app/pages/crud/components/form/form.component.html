@@ -1,1 +1,97 @@
-<p>form works!</p>
+<p-card header="Register Form">
+    <hr>
+    <div class="row">
+        <div class="col">
+            <form [formGroup]="myForm"
+                autocomplete="off"
+                (ngSubmit)="submitForm()">
+                <!-- Username -->
+                <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">Username</label>
+                    <div class="col-sm-9">
+                        <input 
+                            formControlName="username"
+    
+                            type="text"
+                            class="form-control"
+                            placeholder="User's Name">
+    
+                        <span
+                            class="form-text text-danger">
+                            Must be a valid format as 'name' and 'second name'
+                        </span>
+                    </div>
+                </div>
+                <!-- Email -->
+                <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">Email</label>
+                    <div class="col-sm-9">
+                        <input 
+                            formControlName="email"
+                            type="email"
+                            class="form-control"
+                            placeholder="User's Email">
+                        <span
+                            class="form-text text-danger">
+                            Email
+                        </span>
+                    </div>
+                </div>
+                <!-- Password -->
+                <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">Password</label>
+                    <div class="col-sm-9">
+                        <input 
+                            formControlName="password1"
+                            type="password"
+                            class="form-control"
+                            placeholder="Password">
+                        <span
+                            
+                            class="form-text text-danger">
+                            Password must be 6 or longer
+                        </span>
+                    </div>
+                </div>
+                <!-- Repeat Password -->
+                <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">Repeat Password</label>
+                    <div class="col-sm-9">
+                        <input 
+                            formControlName="password2"
+                            type="password"
+                            class="form-control"
+                            placeholder="Repeat Password">
+                        <span
+                            
+                            class="form-text text-danger">
+                            Passwords must be equal
+                        </span>
+                    </div>
+                </div>
+                <!-- Subscribed -->
+                <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label"></label>
+                    <div class="col-sm-9">
+                        <div class="form-check">
+                            <input 
+                                class="form-check-input" 
+                                type="checkbox" 
+                                value="" 
+                                id="flexCheckDefault"
+                                formControlName="subscribed">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              Send me promotions
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <!-- Countries & Cities -->
+                <div class="row mb-3">
+                    <!-- bootstrap dropdown -->
+                </div>
+                <div class="row mb-3"></div>
+            </form>
+        </div>
+    </div>
+</p-card>
