@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { FormsModule } from '@angular/forms';
 
 import { DisplayHideComponent } from './display-hide/display-hide.component';
 
@@ -48,6 +48,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
+    FormsModule,
     PrimeNgModule,
     ReactiveFormsModule
   ]

@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "username": "test",
+      "email": "test@test.com",
+      "password1": "patata",
+      "subscribed": "true",
+      "country": "Spain",
+      "countryCity": "Sevilla",
+      "id": 1
+    },
+    {
+      "username": "mehmeh",
+      "email": "mehmeh",
+      "password1": "mehmeh",
+      "subscribed": false,
+      "country": "Afghanistan",
+      "countryCity": "mehmeh",
+      "id": 2
+    }
+  ]
+}
