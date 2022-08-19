@@ -86,17 +86,30 @@
                         </div>
                     </div>
                 </div>
-                <!-- Countries & Cities -->
+                <!-- Countries -->
                 <div class="row mb-3">
                     <!-- bootstrap dropdown -->
-                    <p-dropdown [options]="countries" 
-                                 
-                                optionLabel="name"
-                    >
+                    <p-dropdown [options]="countries"
+                                formControlName="country">
                     <!-- [(ngModel)]="selectedCity" -->
                     </p-dropdown>
                 </div>
-                <div class="row mb-3"></div>
+                <!-- Cities -->
+                <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">Repeat Password</label>
+                    <div class="col-sm-9">
+                        <input 
+                            formControlName="countryCity"
+                            type="text"
+                            class="form-control"
+                            placeholder="City">
+                        <span
+                            
+                            class="form-text text-danger">
+                            Please write a correct country's city name
+                        </span>
+                    </div>
+                </div>
                 <!-- Button -->
                 <div class="row">
                     <div class="col">
@@ -112,3 +125,6 @@
         </div>
     </div>
 </p-card>
+
+
+<!-- <pre> {{ myForm.controls | json }} </pre> -->
