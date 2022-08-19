@@ -18,12 +18,13 @@ export interface Ara {
 }
 
 
-export interface FormResult {
-    username?    : string;
-    email?       : string;
-    password1?   : string;
-    password2?   : string;
-    subscribed?  : boolean;
-    country?     : string;
-    countryCity? : string;
+export interface formControls {
+    username    : string;
+    email       : string;
+    password1   : string;
+    subscribed  : boolean;
+    country     : string;
+    countryCity : string;
+    id?         : number;
 }
+

@@ -10,7 +10,7 @@ import { CountryName } from '../interfaces/interfaces';
 export class CountriesService {
 
   // API endpoint
-  private _apiUrl: string = "https://restcountries.com/v3.1";
+  private _apiUrl: string = "https://restcountries.com/v3.1";  //TODO: environment
 
   // We want to make http requests
   constructor( private http: HttpClient ) { }
@@ -26,5 +26,6 @@ export class CountriesService {
     // request
     return this.http.get<CountryName[]>( urlQuery, {params: this.httpParams});
   }
+
+  
 }
-[]

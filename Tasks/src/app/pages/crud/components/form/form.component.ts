@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FormResult } from '../../interfaces/interfaces';
-import { CountriesService } from '../../services/services.service';
+import { CountriesService } from '../../services/countries.service';
 import { ValidatorsService } from '../../services/validators.service';
-import { EmailValidatorService } from '../../services/email-validator.service';
-
-type empty = {};
+import { UsersService } from '../../services/users.service';
+import { formControls } from '../../interfaces/interfaces';
 
 
 @Component({
@@ -23,7 +21,7 @@ export class FormComponent implements OnInit {
   // form Group
   myForm: FormGroup = this.fb.group({
     username    : [ '',     [Validators.required, this.validations.cannotBeStrider ]],
-    email       : [ '',     [Validators.required, Validators.pattern( this.validations.emailInputPattern)], [this.emailValidator.validate]],
+    email       : [ '',     [Validators.required]], //, Validators.pattern( this.validations.emailInputPattern)], [this.usersService.validate]],
     password1   : [ '',     [Validators.required, Validators.minLength(6)] ],
     password2   : [ '',     [Validators.required] ],
     subscribed  : [ false,  [Validators.required] ],
@@ -40,7 +38,7 @@ export class FormComponent implements OnInit {
     private countriesService  : CountriesService,     //service to get countries
     private fb                : FormBuilder,          // reactive form injection
     private validations       : ValidatorsService,    // validation service
-    private emailValidator    : EmailValidatorService // email validation service
+    private usersService      : UsersService          // email validation service
   ) { }
 
   ngOnInit(): void {
@@ -60,6 +58,19 @@ export class FormComponent implements OnInit {
     //   return acc;
     // } ,{});
 
+    const payload: formControls = {
+      username    : this.myForm.controls['username'].value,
+      email       : this.myForm.controls['email'].value,
+      password1   : this.myForm.controls['password1'].value,
+      subscribed  : this.myForm.controls['subscribed'].value,
+      country     : this.myForm.controls['country'].value,
+      countryCity : this.myForm.controls['countryCity'].value
+    }
+   
+    
+    this.usersService
+        .postUser( payload )
+        .subscribe( data => console.log('User added successfully'));
 
     
   }
