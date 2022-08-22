@@ -14,23 +14,26 @@ import { formControls } from '../../interfaces/interfaces';
 })
 export class FormComponent implements OnInit {
 
+  editMode      : boolean = false;
+  identifier!   : number;
+  userFromTable!: formControls;
   // countries
-  countries   : string[] = [];
-  selectedCity: string   = '';
+  countries     : string[] = [];
+  selectedCity  : string   = '';
 
   // form Group
   myForm: FormGroup = this.fb.group({
-    username    : [ '',     [Validators.required, this.validations.cannotBeStrider ]],
-    email       : [ '',     [Validators.required]], //, Validators.pattern( this.validations.emailInputPattern)], [this.usersService.validate]],
+    username    : [ '',     [Validators.required]],
+    email       : [ '',     [Validators.required, Validators.pattern( this.validations.emailInputPattern)], [this.usersService]],
     password1   : [ '',     [Validators.required, Validators.minLength(6)] ],
     password2   : [ '',     [Validators.required] ],
     subscribed  : [ false,  [Validators.required] ],
     country     : [ '',     [Validators.required] ],
     countryCity : [ '',     [Validators.required] ],
   },
-  // {
-  //   validators  : []
-  // }
+  {
+    validators  : [this.validations.passMatches( 'password1', 'password2' )]
+  }
   );
 
   
@@ -42,21 +45,64 @@ export class FormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // subscribe to countrie's request
     this.countriesService
         .searchCountries()
         .subscribe( (countries) => {
           // Need new array of countrie's names
           this.countries = countries.map( country =>  country.name.common).sort();
         })
+    // subscribe to table observable
+    this.usersService
+        .getContentToForm()
+        .subscribe( userToEdit => {
+
+          this.editMode = true;
+
+          const {id} = userToEdit;
+          this.identifier = id!;
+
+          const { username, email, password1, subscribed, country, countryCity } = userToEdit;
+
+          // console.log(this.myForm.controls);
+          
+          this.myForm= this.fb.group({
+            username    : [ username,     [Validators.required]],
+            email       : [ email,     [Validators.required, Validators.pattern( this.validations.emailInputPattern)]],
+            password1   : [ password1,     [Validators.required, Validators.minLength(6)] ],
+            password2   : [ password1,     [Validators.required] ],
+            subscribed  : [ subscribed,  [Validators.required] ],
+            country     : [ country,     [Validators.required] ],
+            countryCity : [ countryCity,     [Validators.required] ],
+          },
+          {
+            validators  : [this.validations.passMatches( 'password1', 'password2' )]
+          }
+          );
+          
+        })
+  }
+
+  get emailErrorMssg(): string {
+    const error = this.myForm.get('email')?.errors;
+
+    if(error?.['required']){
+      return 'Email is required';
+    }else if(error?.['pattern']) {
+      return 'Email format invalid';
+    }else if(error?.['usedEmail']){
+      return 'Email is in use';
+    }
+
+    return '';
+  }
+
+   // conditional way to  display error messages
+  validField( field: string ) {
+    return this.myForm.get(field)?.invalid && this.myForm.get(field)?.touched;
   }
 
   submitForm() {
-    // const formInfo = Object.keys(this.myForm.controls).reduce((acc, key)=>{
-    //   console.log(acc);
-      
-    //   acc[key] = this.myForm.controls[key].value;
-    //   return acc;
-    // } ,{});
 
     const payload: formControls = {
       username    : this.myForm.controls['username'].value,
@@ -66,11 +112,27 @@ export class FormComponent implements OnInit {
       country     : this.myForm.controls['country'].value,
       countryCity : this.myForm.controls['countryCity'].value
     }
-   
-    
-    this.usersService
-        .postUser( payload )
-        .subscribe( data => console.log('User added successfully'));
+
+
+    if(this.editMode){
+      // edit mode
+      
+      this.usersService
+          .updateUser( payload, this.identifier )
+          .subscribe( () => console.log('User edited successfully') )
+
+    }else{
+      // add mode
+      this.usersService
+          .postUser( payload )
+          .subscribe( ()=> console.log('User added successfully'));
+    }
+
+
+    // subscribe to observable
+    // this.usersService.fromFormToTable( payload );
+    // mark all fields as touched
+    this.myForm.markAsTouched();
 
     
   }

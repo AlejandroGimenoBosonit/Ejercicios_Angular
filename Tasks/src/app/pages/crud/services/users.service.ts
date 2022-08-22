@@ -1,19 +1,24 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AbstractControl, ValidationErrors } from '@angular/forms';
-import { Observable, map, catchError } from 'rxjs';
+import { AbstractControl, AsyncValidator, ValidationErrors } from '@angular/forms';
+import { Observable, map, Subject } from 'rxjs';
 import { formControls } from '../interfaces/interfaces';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UsersService {
+export class UsersService implements AsyncValidator {
+
+  private _tableContent!  : formControls;
+  private _tableContent$  : Subject<formControls>;
 
   private _jsonServer : string = "http://localhost:3000"; //TODO: environment
 
-  constructor( private http: HttpClient ) { }
+  constructor( private http: HttpClient ) { 
+    this._tableContent$ = new Subject();
+   }
 
-  validate(control: AbstractControl<any, any>): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> {
+  validate(control: AbstractControl<any, any>): Observable<ValidationErrors | null> {
     
     const email: string = control.value;
     // console.log(email);
@@ -21,7 +26,7 @@ export class UsersService {
     // make a request to json-server to check emails
     return this
           .http
-          .get<any[]>(` http://localhost:3000/users?q=${email}`)
+          .get<any[]>(` ${this._jsonServer}/users?q=${email}`)
           .pipe(
             // delay only for undertand form's state
             // delay(3000),
@@ -30,6 +35,19 @@ export class UsersService {
             })
           );
   }
+
+  fromTableToForm(user: formControls) {
+    this._tableContent = user;
+    
+    this._tableContent$.next( this._tableContent );
+    
+  }
+
+  getContentToForm(): Observable<formControls> {
+    return this._tableContent$.asObservable();
+  }
+
+  // http requests
 
   postUser( payload:  formControls): Observable<formControls> {
     // console.log(payload);
@@ -40,5 +58,16 @@ export class UsersService {
 
   getUsers(): Observable<formControls[]> {
     return this.http.get<formControls[]>(`${this._jsonServer}/users` );
+  }
+
+  updateUser( payload: formControls, id: number ): Observable<formControls>{
+    // console.log(payload);
+    
+    const urlQuery: string = `${this._jsonServer}/users/${id}`;
+    return this.http.put<formControls>(urlQuery, payload);
+  }
+
+  deleteUserById(id: number) {
+    return this.http.delete(`${this._jsonServer}/users/${id}`);
   }
 }

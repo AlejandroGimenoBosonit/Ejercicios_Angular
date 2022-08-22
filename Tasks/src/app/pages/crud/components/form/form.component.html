@@ -5,6 +5,9 @@
             <form [formGroup]="myForm"
                 autocomplete="off"
                 (ngSubmit)="submitForm()">
+
+
+
                 <!-- Username -->
                 <div class="row mb-3">
                     <label class="col-sm-3 col-form-label">Username</label>
@@ -17,11 +20,15 @@
                             placeholder="User's Name">
     
                         <span
+                            *ngIf="validField('username')"
                             class="form-text text-danger">
-                            Must be a valid format as 'name' and 'second name'
+                            Must proveed a username
                         </span>
                     </div>
                 </div>
+
+
+
                 <!-- Email -->
                 <div class="row mb-3">
                     <label class="col-sm-3 col-form-label">Email</label>
@@ -31,12 +38,16 @@
                             type="email"
                             class="form-control"
                             placeholder="User's Email">
-                        <span
+                        <span   
+                            *ngIf="validField('email')"
                             class="form-text text-danger">
-                            Email
+                            {{ emailErrorMssg }}
                         </span>
                     </div>
                 </div>
+
+
+
                 <!-- Password -->
                 <div class="row mb-3">
                     <label class="col-sm-3 col-form-label">Password</label>
@@ -47,12 +58,15 @@
                             class="form-control"
                             placeholder="Password">
                         <span
-                            
+                            *ngIf="validField('password1')"
                             class="form-text text-danger">
                             Password must be 6 or longer
                         </span>
                     </div>
                 </div>
+
+
+
                 <!-- Repeat Password -->
                 <div class="row mb-3">
                     <label class="col-sm-3 col-form-label">Repeat Password</label>
@@ -63,12 +77,15 @@
                             class="form-control"
                             placeholder="Repeat Password">
                         <span
-                            
+                            *ngIf="validField('password2')"
                             class="form-text text-danger">
                             Passwords must be equal
                         </span>
                     </div>
                 </div>
+
+
+
                 <!-- Subscribed -->
                 <div class="row mb-3">
                     <label class="col-sm-3 col-form-label"></label>
@@ -86,30 +103,40 @@
                         </div>
                     </div>
                 </div>
+
+
+
                 <!-- Countries -->
                 <div class="row mb-3">
                     <!-- bootstrap dropdown -->
                     <p-dropdown [options]="countries"
-                                formControlName="country">
+                                formControlName="country"
+                                dataKey="country">
                     <!-- [(ngModel)]="selectedCity" -->
                     </p-dropdown>
                 </div>
+
+
+
                 <!-- Cities -->
                 <div class="row mb-3">
-                    <label class="col-sm-3 col-form-label">Repeat Password</label>
+                    <label class="col-sm-3 col-form-label">City</label>
                     <div class="col-sm-9">
                         <input 
                             formControlName="countryCity"
                             type="text"
                             class="form-control"
                             placeholder="City">
-                        <span
-                            
+                        <span 
+                            *ngIf="validField('countryCity')"
                             class="form-text text-danger">
-                            Please write a correct country's city name
+                            City
                         </span>
                     </div>
                 </div>
+
+
+
                 <!-- Button -->
                 <div class="row">
                     <div class="col">
@@ -117,7 +144,7 @@
                             [disabled]="myForm.pending"
                             type="submit" 
                             class="btn btn-primary float-end">
-                            Submit data
+                            {{ editMode ? 'Edit user' : 'Add user' }}
                         </button>
                     </div>
                 </div>
@@ -127,4 +154,18 @@
 </p-card>
 
 
-<!-- <pre> {{ myForm.controls | json }} </pre> -->
+<!-- Debugging -->
+
+<!-- valid form -->
+<!-- <h2>Form Valid: {{ myForm.valid }}</h2> -->
+<!-- State -->
+<!-- <h2>Form State: {{ myForm.status }}</h2> -->
+
+<!-- controls errors -->
+<!-- <pre> {{ myForm.controls['username'].errors | json }} </pre>
+<pre> {{ myForm.controls['email'].errors | json }} </pre>
+<pre> {{ myForm.controls['password1'].errors | json }} </pre>
+<pre> {{ myForm.controls['password2'].errors | json }} </pre>
+<pre> {{ myForm.controls['subscribed'].errors | json }} </pre>
+<pre> {{ myForm.controls['country'].errors | json }} </pre>
+<pre> {{ myForm.controls['countryCity'].errors | json }} </pre> -->
