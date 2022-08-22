@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormComponent } from './components/form/form.component';
+import { formControls } from './interfaces/interfaces';
 
 @Component({
   selector: 'app-crud',

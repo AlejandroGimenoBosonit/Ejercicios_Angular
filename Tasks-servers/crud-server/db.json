@@ -1,22 +1,31 @@
 {
   "users": [
     {
-      "username": "test",
+      "username": "test1",
       "email": "test@test.com",
-      "password1": "patata",
-      "subscribed": "true",
-      "country": "Spain",
-      "countryCity": "Sevilla",
+      "password1": "123456",
+      "subscribed": true,
+      "country": "American Samoa",
+      "countryCity": "Madrid",
       "id": 1
     },
     {
-      "username": "mehmeh",
-      "email": "mehmeh",
-      "password1": "mehmeh",
+      "username": "test2",
+      "email": "test2@mail.com",
+      "password1": "123456",
       "subscribed": false,
-      "country": "Afghanistan",
-      "countryCity": "mehmeh",
+      "country": "Albania",
+      "countryCity": "Wakanda",
       "id": 2
+    },
+    {
+      "username": "test3",
+      "email": "test3@mail.com",
+      "password1": "123456",
+      "subscribed": false,
+      "country": "Anguilla",
+      "countryCity": "Madrid",
+      "id": 3
     }
   ]
 }

@@ -1,5 +1,5 @@
-import { AfterContentChecked, AfterViewInit, Component, DoCheck, OnChanges, OnInit } from '@angular/core';
-import { timeInterval } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { formControls } from '../../interfaces/interfaces';
 import { UsersService } from '../../services/users.service';
 
@@ -9,9 +9,11 @@ import { UsersService } from '../../services/users.service';
   styles: [
   ]
 })
-export class TableComponent implements OnInit, AfterViewInit {
+export class TableComponent implements OnInit {
 
+  clickEvent!: Subscription;
   users: formControls[] = [];
+  // @Input() users!: formControls[];
 
   constructor(
     private usersService: UsersService          // email validation service
@@ -24,22 +26,14 @@ export class TableComponent implements OnInit, AfterViewInit {
         .getUsers()
         .subscribe( users => {
           this.users = users
-          // console.log(users);
-    })
-  }
-  ngAfterViewInit(): void {
-    //Called after every check of the component's or directive's content.
-    //Add 'implements AfterContentChecked' to the class.
-    this.usersService
-        .getUsers()
-        .subscribe( users => {
-          this.users = users
-          // console.log(users);
+          console.log(users);
     })
   }
 
 
   // methods
+
+  
 
   editUserInfo(user: formControls) {
     // console.log(user);

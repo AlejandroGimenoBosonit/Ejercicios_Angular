@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CountriesService } from '../../services/countries.service';
 import { ValidatorsService } from '../../services/validators.service';
@@ -13,6 +13,8 @@ import { formControls } from '../../interfaces/interfaces';
   ]
 })
 export class FormComponent implements OnInit {
+
+  @ViewChild(FormComponent) formComponent!: FormComponent;
 
   editMode      : boolean = false;
   identifier!   : number;
@@ -101,6 +103,7 @@ export class FormComponent implements OnInit {
   validField( field: string ) {
     return this.myForm.get(field)?.invalid && this.myForm.get(field)?.touched;
   }
+
 
   submitForm() {
 
