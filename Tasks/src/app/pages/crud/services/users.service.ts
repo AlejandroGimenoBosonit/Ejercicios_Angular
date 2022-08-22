@@ -9,6 +9,9 @@ import { formControls } from '../interfaces/interfaces';
 })
 export class UsersService implements AsyncValidator {
 
+  private _toTable!: formControls[];
+  private _toTable$: Subject<formControls[]>;
+
   private _tableContent!  : formControls;
   private _tableContent$  : Subject<formControls>;
 
@@ -16,6 +19,7 @@ export class UsersService implements AsyncValidator {
 
   constructor( private http: HttpClient ) { 
     this._tableContent$ = new Subject();
+    this._toTable$      = new Subject();
    }
 
   validate(control: AbstractControl<any, any>): Observable<ValidationErrors | null> {
@@ -36,6 +40,21 @@ export class UsersService implements AsyncValidator {
           );
   }
 
+
+
+  fromFormToTable( users: formControls[] ) {
+    this._toTable = users;
+    this._toTable$.next( this._toTable );
+  }
+  getContentToTable() {
+    return this._toTable$.asObservable();
+  }
+  
+
+
+
+
+
   fromTableToForm(user: formControls) {
     this._tableContent = user;
     
@@ -46,6 +65,17 @@ export class UsersService implements AsyncValidator {
   getContentToForm(): Observable<formControls> {
     return this._tableContent$.asObservable();
   }
+
+
+
+
+
+
+
+
+
+
+
 
   // http requests
 

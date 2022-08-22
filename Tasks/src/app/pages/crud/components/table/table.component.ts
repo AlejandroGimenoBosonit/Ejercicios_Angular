@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, switchMap } from 'rxjs';
 import { formControls } from '../../interfaces/interfaces';
 import { UsersService } from '../../services/users.service';
 
@@ -11,9 +11,7 @@ import { UsersService } from '../../services/users.service';
 })
 export class TableComponent implements OnInit {
 
-  clickEvent!: Subscription;
   users: formControls[] = [];
-  // @Input() users!: formControls[];
 
   constructor(
     private usersService: UsersService          // email validation service
@@ -25,8 +23,8 @@ export class TableComponent implements OnInit {
     this.usersService
         .getUsers()
         .subscribe( users => {
-          this.users = users
           console.log(users);
+          this.users = users 
     })
   }
 
@@ -44,7 +42,7 @@ export class TableComponent implements OnInit {
 
   deleteUser(id: number) {
     // request to delete
-    console.log(id);
+    // console.log(id);
 
     //request
     this.usersService
