@@ -22,6 +22,8 @@ import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 import { FormComponent } from './crud/components/form/form.component';
 import { TableComponent } from './crud/components/table/table.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { InputComponent } from './search-on-type/components/input/input.component';
+import { ListComponent } from './search-on-type/components/list/list.component';
 
 
 @NgModule({
@@ -36,6 +38,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CrudComponent,
     FormComponent,
     TableComponent,
+    InputComponent,
+    ListComponent,
   ],
   imports: [
     CommonModule,

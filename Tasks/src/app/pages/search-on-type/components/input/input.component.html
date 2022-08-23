@@ -1,0 +1,49 @@
+
+<div class="row">
+    <div class="col flex flex-row flex-wrap card-container blue-container">
+
+        <p-selectButton
+            [options]="filterOptions" 
+            [(ngModel)]="filterValue"
+            optionLabel="name"
+            (click)="setFilter()"
+        >
+            <ng-template let-filter >
+                {{ filter.name }}
+            </ng-template>
+        </p-selectButton>
+
+        <span class="p-float-label">
+            <input id="float-input-invalid" type="text" pInputText [(ngModel)]="inputValue" class="ng-invalid ng-dirty"> 
+            <label for="float-input-invalid">University</label>
+        </span>
+        <!-- <input type="text" pInputText [(ngModel)]="inputValue" /> -->
+
+        <!-- 
+
+
+            <input id="float-input-invalid" type="text" pInputText [(ngModel)]="value6" class="ng-invalid ng-dirty"> 
+            <label for="float-input-invalid">Username</label>
+
+
+
+         -->
+        
+    </div>
+    <span
+        *ngIf="needInput"
+        class="form-text text-danger">
+        Must proveed a University
+    </span> 
+</div>
+
+
+
+
+
+
+<app-list></app-list>
+
+
+<h2>Filter: {{ filterValue | json }}</h2>
+<h3>Input: {{ inputValue }}</h3>

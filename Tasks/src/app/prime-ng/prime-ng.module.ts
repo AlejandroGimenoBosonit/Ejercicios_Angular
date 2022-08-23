@@ -6,8 +6,8 @@ import {CardModule} from 'primeng/card';
 import {ButtonModule} from 'primeng/button';
 import {FieldsetModule} from 'primeng/fieldset';
 import {TableModule} from 'primeng/table';
-
-
+import {InputTextModule} from 'primeng/inputtext';
+import {SelectButtonModule} from 'primeng/selectbutton';
 
 
 @NgModule({
@@ -21,7 +21,9 @@ import {TableModule} from 'primeng/table';
     CardModule,
     ButtonModule,
     FieldsetModule,
-    TableModule
+    TableModule,
+    InputTextModule,
+    SelectButtonModule
   ]
 })
 export class PrimeNgModule { }
