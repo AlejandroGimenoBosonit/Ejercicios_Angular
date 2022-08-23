@@ -44,6 +44,13 @@ export class TableComponent implements OnInit {
           }
         })
 
+    this.usersService
+        .getUsersToTable()
+        .subscribe(data => {
+          console.log(data);
+          
+        })
+
 
   }
 
@@ -64,7 +71,8 @@ export class TableComponent implements OnInit {
     this.usersService
         .deleteUserById( id )
         .subscribe(() => {
-          
+          // next delete
+          this.usersService.fromDeleteToTable(this.users, id);
         });
     
   }
