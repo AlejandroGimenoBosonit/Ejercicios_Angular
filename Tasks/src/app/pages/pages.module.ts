@@ -18,14 +18,6 @@ import { ChartsComponent } from './charts/charts.component';
 import { CounterComponent } from './counter/counter.component';
 
 
-
-
-
-
-
-
-
-
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 import { FormComponent } from './crud/components/form/form.component';
 import { TableComponent } from './crud/components/table/table.component';
@@ -39,7 +31,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     DisplayHideComponent,
     LightSwitchComponent,
     SearchOnTypeComponent,
-    
     ParentComponent,
     ChildComponent,
     CrudComponent,
