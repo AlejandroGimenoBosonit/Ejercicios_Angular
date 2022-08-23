@@ -1,31 +1,3 @@
 {
-  "users": [
-    {
-      "username": "test1",
-      "email": "test@test.com",
-      "password1": "123456",
-      "subscribed": true,
-      "country": "American Samoa",
-      "countryCity": "Madrid",
-      "id": 1
-    },
-    {
-      "username": "test2",
-      "email": "test2@mail.com",
-      "password1": "123456",
-      "subscribed": false,
-      "country": "Albania",
-      "countryCity": "Wakanda",
-      "id": 2
-    },
-    {
-      "username": "test3",
-      "email": "test3@mail.com",
-      "password1": "123456",
-      "subscribed": false,
-      "country": "Anguilla",
-      "countryCity": "Madrid",
-      "id": 3
-    }
-  ]
+  "users": []
 }

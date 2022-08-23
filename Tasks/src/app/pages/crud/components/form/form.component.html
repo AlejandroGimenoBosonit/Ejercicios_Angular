@@ -1,157 +1,167 @@
-<p-card header="Register Form">
-    <hr>
-    <div class="row">
-        <div class="col m-3">
-            <form [formGroup]="myForm"
-                autocomplete="off"
-                (ngSubmit)="submitForm()">
+
+<div class="grid">
+
+    <p-card class="col-12 md:col-12 lg:col-fixed" header="Register Form">
+        <hr>
+        <div class="row">
+            <div class="col m-3">
+                <form [formGroup]="myForm"
+                    autocomplete="off"
+                    (ngSubmit)="submitForm()">
 
 
 
-                <!-- Username -->
-                <div class="row mb-3">
-                    <label class="col-sm-3 col-form-label">Username</label>
-                    <div class="col-sm-9">
-                        <input 
-                            formControlName="username"
-    
-                            type="text"
-                            class="form-control"
-                            placeholder="User's Name">
-    
-                        <span
-                            *ngIf="validField('username')"
-                            class="form-text text-danger">
-                            Must proveed a username
-                        </span>
-                    </div>
-                </div>
-
-
-
-                <!-- Email -->
-                <div class="row mb-3">
-                    <label class="col-sm-3 col-form-label">Email</label>
-                    <div class="col-sm-9">
-                        <input 
-                            formControlName="email"
-                            type="email"
-                            class="form-control"
-                            placeholder="User's Email">
-                        <span   
-                            *ngIf="validField('email')"
-                            class="form-text text-danger">
-                            {{ emailErrorMssg }}
-                        </span>
-                    </div>
-                </div>
-
-
-
-                <!-- Password -->
-                <div class="row mb-3">
-                    <label class="col-sm-3 col-form-label">Password</label>
-                    <div class="col-sm-9">
-                        <input 
-                            formControlName="password1"
-                            type="password"
-                            class="form-control"
-                            placeholder="Password">
-                        <span
-                            *ngIf="validField('password1')"
-                            class="form-text text-danger">
-                            Password must be 6 or longer
-                        </span>
-                    </div>
-                </div>
-
-
-
-                <!-- Repeat Password -->
-                <div class="row mb-3">
-                    <label class="col-sm-3 col-form-label">Repeat Password</label>
-                    <div class="col-sm-9">
-                        <input 
-                            formControlName="password2"
-                            type="password"
-                            class="form-control"
-                            placeholder="Repeat Password">
-                        <span
-                            *ngIf="validField('password2')"
-                            class="form-text text-danger">
-                            Passwords must be equal
-                        </span>
-                    </div>
-                </div>
-
-
-
-                <!-- Subscribed -->
-                <div class="row mb-3">
-                    <label class="col-sm-3 col-form-label"></label>
-                    <div class="col-sm-9">
-                        <div class="form-check">
+                    <!-- Username -->
+                    <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label">Username</label>
+                        <div class="col-sm-9">
                             <input 
-                                class="form-check-input" 
-                                type="checkbox" 
-                                value="" 
-                                id="flexCheckDefault"
-                                formControlName="subscribed">
-                            <label class="form-check-label" for="flexCheckDefault">
-                              Send me promotions
-                            </label>
+                                formControlName="username"
+        
+                                type="text"
+                                class="form-control"
+                                placeholder="User's Name">
+        
+                            <span
+                                *ngIf="validField('username')"
+                                class="form-text text-danger">
+                                Must proveed a username
+                            </span>
                         </div>
                     </div>
-                </div>
 
 
 
-                <!-- Countries -->
-                <div class="row mb-3">
-                    <!-- bootstrap dropdown -->
-                    <p-dropdown [options]="countries"
-                                formControlName="country"
-                                dataKey="country">
-                    <!-- [(ngModel)]="selectedCity" -->
-                    </p-dropdown>
-                </div>
-
-
-
-                <!-- Cities -->
-                <div class="row mb-3">
-                    <label class="col-sm-3 col-form-label">City</label>
-                    <div class="col-sm-9">
-                        <input 
-                            formControlName="countryCity"
-                            type="text"
-                            class="form-control"
-                            placeholder="City">
-                        <span 
-                            *ngIf="validField('countryCity')"
-                            class="form-text text-danger">
-                            City
-                        </span>
+                    <!-- Email -->
+                    <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label">Email</label>
+                        <div class="col-sm-9">
+                            <input 
+                                formControlName="email"
+                                type="email"
+                                class="form-control"
+                                placeholder="User's Email">
+                            <span   
+                                *ngIf="validField('email')"
+                                class="form-text text-danger">
+                                {{ emailErrorMssg }}
+                            </span>
+                        </div>
                     </div>
-                </div>
 
 
 
-                <!-- Button -->
-                <div class="row">
-                    <div class="col">
-                        <button
-                            [disabled]="myForm.invalid"
-                            type="submit" 
-                            class="btn btn-primary float-end">
-                            {{ editMode ? 'Edit user' : 'Add user' }}
-                        </button>
+                    <!-- Password -->
+                    <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label">Password</label>
+                        <div class="col-sm-9">
+                            <input 
+                                formControlName="password1"
+                                type="password"
+                                class="form-control"
+                                placeholder="Password">
+                            <span
+                                *ngIf="validField('password1')"
+                                class="form-text text-danger">
+                                Password must be 6 or longer
+                            </span>
+                        </div>
                     </div>
-                </div>
-            </form>
+
+
+
+                    <!-- Repeat Password -->
+                    <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label">Repeat Password</label>
+                        <div class="col-sm-9">
+                            <input 
+                                formControlName="password2"
+                                type="password"
+                                class="form-control"
+                                placeholder="Repeat Password">
+                            <span
+                                *ngIf="validField('password2')"
+                                class="form-text text-danger">
+                                Passwords must be equal
+                            </span>
+                        </div>
+                    </div>
+
+
+
+                    <!-- Subscribed -->
+                    <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label"></label>
+                        <div class="col-sm-9">
+                            <div class="form-check">
+                                <input 
+                                    class="form-check-input" 
+                                    type="checkbox" 
+                                    value="" 
+                                    id="flexCheckDefault"
+                                    formControlName="subscribed">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                Send me promotions
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- Countries -->
+                    <div class="row mb-3">
+                        <!-- bootstrap dropdown -->
+                        <p-dropdown [options]="countries"
+                                    formControlName="country"
+                                    dataKey="country">
+                        <!-- [(ngModel)]="selectedCity" -->
+                        </p-dropdown>
+                    </div>
+
+
+
+                    <!-- Cities -->
+                    <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label">City</label>
+                        <div class="col-sm-9">
+                            <input 
+                                formControlName="countryCity"
+                                type="text"
+                                class="form-control"
+                                placeholder="City">
+                            <span 
+                                *ngIf="validField('countryCity')"
+                                class="form-text text-danger">
+                                City
+                            </span>
+                        </div>
+                    </div>
+
+
+
+                    <!-- Button -->
+                    <div class="row">
+                        <div class="col">
+                            <button
+                                [disabled]="myForm.invalid"
+                                type="submit" 
+                                class="btn btn-primary float-end">
+                                {{ editMode ? 'Edit user' : 'Add user' }}
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
+    </p-card>  
+
+    <div class="col-12 lg:col">
+        <!-- Pass user via input to the table -->
+        <app-table ></app-table>
     </div>
-</p-card>
+</div>
+
 
 
 <!-- Debugging -->

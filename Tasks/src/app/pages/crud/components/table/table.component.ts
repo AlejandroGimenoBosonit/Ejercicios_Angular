@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component,OnInit } from '@angular/core';
 import { formControls } from '../../interfaces/interfaces';
 import { UsersService } from '../../services/users.service';
 
@@ -11,30 +10,52 @@ import { UsersService } from '../../services/users.service';
 })
 export class TableComponent implements OnInit {
 
-  clickEvent!: Subscription;
   users: formControls[] = [];
-  // @Input() users!: formControls[];
 
   constructor(
     private usersService: UsersService          // email validation service
   ) {}
 
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
+
     this.usersService
         .getUsers()
         .subscribe( users => {
-          this.users = users
-          console.log(users);
-    })
+          this.users = users;
+        });
+         
+    this.usersService
+        .getFormUser()
+        .subscribe( user => {
+          // console.log(user);
+
+          // check for update or adding
+          const inTable: boolean[] = this.users.map( arrayUser => arrayUser.id === user.id);
+          if(inTable.includes(true)){
+            // edit mode
+            const userArr = [user];
+            const newArr = this.users.map( obj => userArr.find(o => o.id===obj.id) || obj );
+
+            this.users = newArr;
+
+          }else{
+            // adding mode
+            this.users.push(user);
+          }
+        })
+
+    this.usersService
+        .getUsersToTable()
+        .subscribe(data => {
+          console.log(data);
+          
+        })
+
+
   }
 
 
   // methods
-
-  
-
   editUserInfo(user: formControls) {
     // console.log(user);
     // call observable method
@@ -44,12 +65,15 @@ export class TableComponent implements OnInit {
 
   deleteUser(id: number) {
     // request to delete
-    console.log(id);
+    // console.log(id);
 
     //request
     this.usersService
         .deleteUserById( id )
-        .subscribe(() => console.log("user deleted"));
+        .subscribe(() => {
+          // next delete
+          this.usersService.fromDeleteToTable(this.users, id);
+        });
     
   }
 }

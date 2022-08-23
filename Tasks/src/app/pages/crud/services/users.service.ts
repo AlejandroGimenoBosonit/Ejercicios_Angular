@@ -3,11 +3,19 @@ import { HttpClient } from '@angular/common/http';
 import { AbstractControl, AsyncValidator, ValidationErrors } from '@angular/forms';
 import { Observable, map, Subject } from 'rxjs';
 import { formControls } from '../interfaces/interfaces';
+import { ThisReceiver } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService implements AsyncValidator {
+
+
+  private _users!         : formControls[];
+  private _users$         : Subject<formControls[]>;
+
+  private _toTable!       : formControls;
+  private _toTable$       : Subject<formControls>;
 
   private _tableContent!  : formControls;
   private _tableContent$  : Subject<formControls>;
@@ -16,6 +24,8 @@ export class UsersService implements AsyncValidator {
 
   constructor( private http: HttpClient ) { 
     this._tableContent$ = new Subject();
+    this._toTable$      = new Subject();
+    this._users$        = new Subject(); 
    }
 
   validate(control: AbstractControl<any, any>): Observable<ValidationErrors | null> {
@@ -35,17 +45,49 @@ export class UsersService implements AsyncValidator {
             })
           );
   }
+   
 
-  fromTableToForm(user: formControls) {
-    this._tableContent = user;
-    
-    this._tableContent$.next( this._tableContent );
-    
+  fromDeleteToTable(users: formControls[], id: number) {
+
+    this._users = users.splice(users.indexOf(users.find((element)=>element.id===id)!));
+
+    this._users$.next(this._users);
+  }
+  getUsersToTable():Observable<formControls[]> {
+    return this._users$.asObservable();
   }
 
+  
+  // observable to render a new user in the table
+  fromFormToTable(user: formControls){
+    this._toTable = user;
+    this._toTable$.next(this._toTable);
+  } 
+  getFormUser(): Observable<formControls>{
+    return this._toTable$.asObservable();
+  }
+  
+
+  
+  // observable to pass user data from table to form
+  fromTableToForm(user: formControls) {
+    this._tableContent = user;
+    this._tableContent$.next( this._tableContent );
+  }
   getContentToForm(): Observable<formControls> {
     return this._tableContent$.asObservable();
   }
+
+
+
+
+
+
+
+
+
+
+
 
   // http requests
 

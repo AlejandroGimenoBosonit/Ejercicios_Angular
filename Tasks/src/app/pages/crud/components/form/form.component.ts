@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CountriesService } from '../../services/countries.service';
 import { ValidatorsService } from '../../services/validators.service';
@@ -9,12 +9,13 @@ import { formControls } from '../../interfaces/interfaces';
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
-  styles: [
-  ]
+  styles: [`
+    p-card {
+      width: 450px;
+    }
+  `]
 })
 export class FormComponent implements OnInit {
-
-  @ViewChild(FormComponent) formComponent!: FormComponent;
 
   editMode      : boolean = false;
   identifier!   : number;
@@ -122,22 +123,35 @@ export class FormComponent implements OnInit {
       
       this.usersService
           .updateUser( payload, this.identifier )
-          .subscribe( () => console.log('User edited successfully') )
+          .subscribe( (userToEdit) => {
+            console.log(userToEdit);
+            this.usersService.fromFormToTable(userToEdit);
+            // mark all fields as touched
+            this.myForm.markAsTouched();
+            console.log('llega');
+          })
 
     }else{
       // add mode
       this.usersService
           .postUser( payload )
-          .subscribe( ()=> console.log('User added successfully'));
+          .subscribe( (userForm)=> {
+            // console.log(data);
+
+
+            
+            // calling a service method to subscribe to any changes
+            this.usersService.fromFormToTable(userForm);
+
+
+
+            // mark all fields as touched
+            this.myForm.markAsTouched();
+            console.log('llega');
+            
+          });
     }
-
-
-    // subscribe to observable
-    // this.usersService.fromFormToTable( payload );
-    // mark all fields as touched
-    this.myForm.markAsTouched();
-
+    this.myForm.reset();
     
   }
-
 }
