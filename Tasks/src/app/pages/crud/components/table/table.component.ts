@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Subscription, switchMap } from 'rxjs';
+import { Component,OnInit } from '@angular/core';
 import { formControls } from '../../interfaces/interfaces';
 import { UsersService } from '../../services/users.service';
 
@@ -18,21 +17,38 @@ export class TableComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
+
     this.usersService
         .getUsers()
         .subscribe( users => {
-          console.log(users);
-          this.users = users 
-    })
+          this.users = users;
+        });
+         
+    this.usersService
+        .getFormUser()
+        .subscribe( user => {
+          // console.log(user);
+
+          // check for update or adding
+          const inTable: boolean[] = this.users.map( arrayUser => arrayUser.id === user.id);
+          if(inTable.includes(true)){
+            // edit mode
+            const userArr = [user];
+            const newArr = this.users.map( obj => userArr.find(o => o.id===obj.id) || obj );
+
+            this.users = newArr;
+
+          }else{
+            // adding mode
+            this.users.push(user);
+          }
+        })
+
+
   }
 
 
   // methods
-
-  
-
   editUserInfo(user: formControls) {
     // console.log(user);
     // call observable method
@@ -47,7 +63,9 @@ export class TableComponent implements OnInit {
     //request
     this.usersService
         .deleteUserById( id )
-        .subscribe(() => console.log("user deleted"));
+        .subscribe(() => {
+          
+        });
     
   }
 }

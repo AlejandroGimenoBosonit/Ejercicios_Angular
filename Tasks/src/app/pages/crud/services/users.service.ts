@@ -9,8 +9,8 @@ import { formControls } from '../interfaces/interfaces';
 })
 export class UsersService implements AsyncValidator {
 
-  private _toTable!: formControls[];
-  private _toTable$: Subject<formControls[]>;
+  private _toTable!       : formControls;
+  private _toTable$       : Subject<formControls>;
 
   private _tableContent!  : formControls;
   private _tableContent$  : Subject<formControls>;
@@ -39,27 +39,26 @@ export class UsersService implements AsyncValidator {
             })
           );
   }
-
-
-
-  fromFormToTable( users: formControls[] ) {
-    this._toTable = users;
-    this._toTable$.next( this._toTable );
-  }
-  getContentToTable() {
-    return this._toTable$.asObservable();
-  }
   
 
+  // observable to render a new user in the table
+  fromFormToTable(user: formControls){
+    this._toTable = user;
+    this._toTable$.next(this._toTable);
+  } 
 
+  getFormUser(): Observable<formControls>{
+    return this._toTable$.asObservable();
+  }
 
+  // observable to edit a existing user in the table
+  
 
-
+  
+  // observable to pass user data from table to form
   fromTableToForm(user: formControls) {
     this._tableContent = user;
-    
     this._tableContent$.next( this._tableContent );
-    
   }
 
   getContentToForm(): Observable<formControls> {
