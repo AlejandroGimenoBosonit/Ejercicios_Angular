@@ -8,7 +8,7 @@ import {FieldsetModule} from 'primeng/fieldset';
 import {TableModule} from 'primeng/table';
 import {InputTextModule} from 'primeng/inputtext';
 import {SelectButtonModule} from 'primeng/selectbutton';
-
+import {CheckboxModule} from 'primeng/checkbox';
 
 @NgModule({
   declarations: [],
@@ -23,7 +23,8 @@ import {SelectButtonModule} from 'primeng/selectbutton';
     FieldsetModule,
     TableModule,
     InputTextModule,
-    SelectButtonModule
+    SelectButtonModule,
+    CheckboxModule
   ]
 })
 export class PrimeNgModule { }

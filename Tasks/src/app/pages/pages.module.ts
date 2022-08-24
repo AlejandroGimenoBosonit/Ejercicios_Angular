@@ -23,6 +23,8 @@ import { FormComponent } from './crud/components/form/form.component';
 import { TableComponent } from './crud/components/table/table.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InputComponent } from './search-on-type/components/input/input.component';
+import { ControllersComponent } from './light-switch/components/controllers/controllers.component';
+import { TrafficLightComponent } from './light-switch/components/traffic-light/traffic-light.component';
 
 
 @NgModule({
@@ -38,6 +40,8 @@ import { InputComponent } from './search-on-type/components/input/input.componen
     FormComponent,
     TableComponent,
     InputComponent,
+    ControllersComponent,
+    TrafficLightComponent,
   ],
   imports: [
     CommonModule,
