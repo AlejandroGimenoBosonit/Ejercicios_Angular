@@ -23,7 +23,6 @@ import { FormComponent } from './crud/components/form/form.component';
 import { TableComponent } from './crud/components/table/table.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InputComponent } from './search-on-type/components/input/input.component';
-import { ListComponent } from './search-on-type/components/list/list.component';
 
 
 @NgModule({
@@ -39,7 +38,6 @@ import { ListComponent } from './search-on-type/components/list/list.component';
     FormComponent,
     TableComponent,
     InputComponent,
-    ListComponent,
   ],
   imports: [
     CommonModule,

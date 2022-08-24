@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
-import { Filter } from '../../interfaces/interfaces';
+import { debounceTime, Subject } from 'rxjs';
+import { Filter, Universities } from '../../interfaces/interfaces';
+import { UniversitiesService } from '../../services/universities.service';
 
 @Component({
   selector: 'app-input',
@@ -10,36 +12,28 @@ import { Filter } from '../../interfaces/interfaces';
 })
 
 export class InputComponent implements OnInit {
+  
+  @Output() onDebounce: EventEmitter<string> = new EventEmitter();
+  needInput!          : boolean; // default false = 'invalid'
+  name                : string = '';
+  debouncer           : Subject<string> = new Subject(); // special observable to deal with onDebounce
 
-  filterOptions!  : Filter[];
-  filterValue!    : Filter;
-  inputValue!     : string;
-  needInput       : boolean = false;
-
-  constructor( private primeNGConfig: PrimeNGConfig ) { 
-    this.filterOptions = [
-      {name: "Spain" , },
-      {name: "United Kingdom"},
-      {name: "Portugal"}
-    ];
-   }
+  constructor() {  }
 
   ngOnInit(): void {
-    this.primeNGConfig.ripple = true;
-    
+
+    //Don't emit the debounce until there are passed 300ms
+    this.debouncer
+        .pipe( debounceTime( 300 ) )
+        .subscribe( value => {
+          this.needInput = !this.needInput;
+          this.onDebounce.emit( value );
+        })
   }
 
-  setFilter() {
-
-    // check for input error
-    if( this.inputValue ){
-      console.log(`Choosen filter: ${this.filterValue.name}.\nChoosen country: ${this.inputValue}`)
-    }else{
-      // error case
-      this.needInput = true;
-    }
-    
-    // request
+  pressKey() {
+    this.debouncer.next( this.name );
   }
+  
 
 }
