@@ -1,1 +1,26 @@
-<p>search-on-type works!</p>
+<div class=" col flex flex-row flex-wrap card-container blue-container">
+    <p-selectButton
+        [options]="filterOptions" 
+        optionLabel="name"
+        [(ngModel)]="filterValue"
+        (click)="setButtonValue(filterValue)"
+    >
+        <ng-template let-filter >
+            {{ filter.name }}
+        </ng-template>
+    </p-selectButton>
+
+    <app-input
+        (onDebounce)="updateInputValue($event)"
+    ></app-input>
+</div>
+
+<ul class="list-group">
+    <li *ngFor="let university of suggestedUniversities"
+        class="list-group-item"
+    >
+        {{ university.name }}
+    </li>
+  </ul>
+<!-- <app-list (listContent)="suggestedUniversities" ></app-list> -->
+<!-- <pre> {{ suggestedUniversities | json }} </pre> -->

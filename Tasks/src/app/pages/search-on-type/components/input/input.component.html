@@ -1,0 +1,20 @@
+
+
+<span class="p-float-label field">
+    <input  pInputText
+        id="float-input-invalid" 
+        type="text"
+        name="name"
+        [ngClass]="needInput ? 'ng-valid ng-dirty' : 'ng-invalid ng-dirty'"
+        placeholder="Enter University"
+        
+        [(ngModel)]="name"
+        (input)="pressKey()"
+    >
+    <label for="float-input-invalid">University</label>
+</span>
+
+    
+
+<!-- debugging -->
+<!-- <pre> {{needInput}} </pre> -->
