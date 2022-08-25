@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CountryName } from '../interfaces/interfaces';
+import { environment } from '../../../../environments/environment';
 
 
 @Injectable({
@@ -10,7 +11,7 @@ import { CountryName } from '../interfaces/interfaces';
 export class CountriesService {
 
   // API endpoint
-  private _apiUrl: string = "https://restcountries.com/v3.1";  //TODO: environment
+  private _apiUrl: string = environment.countryEndPoint;
 
   // We want to make http requests
   constructor( private http: HttpClient ) { }

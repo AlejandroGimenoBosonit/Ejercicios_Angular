@@ -9,6 +9,9 @@ import {TableModule} from 'primeng/table';
 import {InputTextModule} from 'primeng/inputtext';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {CheckboxModule} from 'primeng/checkbox';
+import {ChartModule} from 'primeng/chart';
+
+import {RippleModule} from 'primeng/ripple';
 
 @NgModule({
   declarations: [],
@@ -24,7 +27,9 @@ import {CheckboxModule} from 'primeng/checkbox';
     TableModule,
     InputTextModule,
     SelectButtonModule,
-    CheckboxModule
+    CheckboxModule,
+    ChartModule,
+    RippleModule
   ]
 })
 export class PrimeNgModule { }
