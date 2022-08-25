@@ -25,6 +25,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { InputComponent } from './search-on-type/components/input/input.component';
 import { ControllersComponent } from './light-switch/components/controllers/controllers.component';
 import { TrafficLightComponent } from './light-switch/components/traffic-light/traffic-light.component';
+import { LinearChartComponent } from './charts/components/linear-chart/linear-chart.component';
+import { BarChartComponent } from './charts/components/double-linear-chart/bar-chart.component';
+import { DoughnutChartComponent } from './charts/components/doughnut-chart/doughnut-chart.component';
 
 
 @NgModule({
@@ -42,6 +45,9 @@ import { TrafficLightComponent } from './light-switch/components/traffic-light/t
     InputComponent,
     ControllersComponent,
     TrafficLightComponent,
+    LinearChartComponent,
+    DoughnutChartComponent,
+    BarChartComponent
   ],
   imports: [
     CommonModule,

@@ -4,6 +4,7 @@ import { AbstractControl, AsyncValidator, ValidationErrors } from '@angular/form
 import { Observable, map, Subject } from 'rxjs';
 import { formControls } from '../interfaces/interfaces';
 import { ThisReceiver } from '@angular/compiler';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class UsersService implements AsyncValidator {
   private _tableContent!  : formControls;
   private _tableContent$  : Subject<formControls>;
 
-  private _jsonServer : string = "http://localhost:3000"; //TODO: environment
+  private _jsonServer : string = environment.jsonServerEndPoint;
 
   constructor( private http: HttpClient ) { 
     this._tableContent$ = new Subject();
