@@ -28,6 +28,8 @@ export class InputComponent implements OnInit {
         .subscribe( value => {
           this.needInput = !this.needInput;
           this.onDebounce.emit( value );
+          console.log(value);
+          
         })
   }
 

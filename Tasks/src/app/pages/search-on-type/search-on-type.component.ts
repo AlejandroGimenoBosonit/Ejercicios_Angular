@@ -22,7 +22,7 @@ export class SearchOnTypeComponent implements OnInit {
     private universitiesService : UniversitiesService
   ) { 
     this.filterOptions = [
-      {name: "Spain"          , alpha2Code: 'SP'},
+      {name: "Spain"          , alpha2Code: 'ES'},
       {name: "United Kingdom" , alpha2Code: 'GB'},
       {name: "Portugal"       , alpha2Code: 'PT'}
     ];
@@ -42,6 +42,8 @@ export class SearchOnTypeComponent implements OnInit {
       this.universitiesService
           .searchUniversities( this.filterValue.alpha2Code, event )
           .subscribe( universities => {
+            console.log(universities);
+            
             this.suggestedUniversities = universities;
           })
     }

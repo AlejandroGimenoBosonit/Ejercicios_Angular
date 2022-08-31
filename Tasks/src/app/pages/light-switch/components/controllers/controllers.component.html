@@ -1,6 +1,6 @@
 
-<p-card header="Register Form" class="flex align-items-center justify-content-center">
-    <div class="container-controller">
+<p-card header="Register Form" class="flex align-items-center justify-content-around m-5" [style]="{width: '360px'}">
+    <div class="container-controller flex align-items-center justify-content-around">
         <h5>Controller</h5>
         <p-dropdown [options]="trafficLightColors"
                     [(ngModel)]="selectedColor"
@@ -10,14 +10,16 @@
         ></p-dropdown>
     </div>
     
-    <div class="field-checkbox">
+    <div class="field-checkbox mx-3">
         
         <p-checkbox [binary]="true" 
                     inputId="binary"
                     name="checked"
                     (onChange)="togglePower()"
         ></p-checkbox>
-        <label for="binary">On/Off</label>
+        <label class="flex flex-row" for="binary">
+            <div [ngStyle]="{'font-weight': (checked) ? 'bold':null}">On</div>/<div [ngStyle]="{'font-weight': (!checked) ? 'bold':null}">Off</div>
+        </label>
     </div>
 </p-card>
 
