@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { interval, Subscription } from 'rxjs';
+import { Component, AfterViewChecked, OnInit } from '@angular/core';
+import { interval, Observable, of, takeUntil, timer, Subject, count } from 'rxjs';
+import { Counter } from './interface/interfaces';
 
 @Component({
   selector: 'app-counter',
@@ -9,36 +10,70 @@ import { interval, Subscription } from 'rxjs';
 })
 export class CounterComponent implements OnInit {
 
-  timerSubscription!: Subscription;
+  // Rxjs inetrval as counter
+  // Emits incremental numbers periodically in time. (1s = 1000 ms)
+  counter = interval(1000);
 
+  counterValue!: number;
+  setTo!: number;
 
-  seconds : number = 0;
-  count   : boolean = false;
-  countUp : boolean = true;
-  value   : number  = 0;
-  speed   : number  = 1000;
-  step    : number  = 1;
+  // default counter data
+  counterData: Counter = {
+    "count"   :true,
+    "countUp" :false,
+    "value"   :0, // not edit
+    "speed"   :1000,
+    "step"    :1
+  };
+
+  stopSignal = new Subject<boolean>();
 
   constructor() { }
 
   ngOnInit(): void {
-    // this.timerSubscription = interval(1000).subscribe( i => this.seconds=i )
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this.counterValue = this.counterData.value;
+
+    this.getDataToSet();
     
   }
 
-  start(){
-    this.count = true;
-    if(this.count){
-      this.timerSubscription = interval(1000).subscribe( i => this.seconds=i )
+  getButtonsSignal( event: string ): void {
+    switch(event){
+      case 'start':
+        // start counter
+        // subscribe to the observable
+        this.counter
+            .pipe( 
+              takeUntil(
+                this.stopSignal
+              )
+            )
+            .subscribe( response => {
+              // console.log(response);
+              this.counterValue = response;
+            } );
+        break;
+      case 'pause':
+        // pause counter
+
+        this.stopSignal.next( !this.counterData.count );
+
+        break;
+      case 'reset':
+
+        
+        this.stopSignal.next( true);
+
+        // reset counterValue = 0
+        this.counterValue = 0;
+        break;
     }
   }
-  reset(){
-    this.count = false;
-    this.seconds = 0;
+
+  getDataToSet() {
+    this.setTo = this.counterData.value
   }
-  pause(){
-    this.count = false;
-    this.seconds = 0;
-    this.timerSubscription.unsubscribe();
-  }
+
 }

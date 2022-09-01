@@ -1,6 +1,20 @@
-<h2>{{ seconds }}</h2>
+<h2>Counter Task</h2>
+<hr>
 
+<p-card>
+    <!-- number -->
+    <h2> Counter: {{ counterValue }} </h2>
 
-<button pButton (click)="start()" label="Start"></button>
-<button pButton (click)="reset()" label="Reset"></button>
-<button pButton (click)="pause()" label="Pause"></button>
+    <!-- buttons component -->
+    <div class="buttons-container m-5">
+        <app-buttons (signal)="getButtonsSignal($event)" ></app-buttons>
+    </div>
+
+    <!-- counts component -->
+    <div class="counts-container m-5">
+        <app-counts [setTo]="setTo" class="flex justify-content-center"></app-counts>
+    </div>
+</p-card>
+
+<!-- Debugging -->
+<pre> {{ counterData | json }} </pre>

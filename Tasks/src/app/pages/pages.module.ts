@@ -28,6 +28,8 @@ import { TrafficLightComponent } from './light-switch/components/traffic-light/t
 import { LinearChartComponent } from './charts/components/linear-chart/linear-chart.component';
 import { BarChartComponent } from './charts/components/double-linear-chart/bar-chart.component';
 import { DoughnutChartComponent } from './charts/components/doughnut-chart/doughnut-chart.component';
+import { ButtonsComponent } from './counter/components/buttons/buttons.component';
+import { CountsComponent } from './counter/components/counts/counts.component';
 
 
 @NgModule({
@@ -47,7 +49,9 @@ import { DoughnutChartComponent } from './charts/components/doughnut-chart/dough
     TrafficLightComponent,
     LinearChartComponent,
     DoughnutChartComponent,
-    BarChartComponent
+    BarChartComponent,
+    ButtonsComponent,
+    CountsComponent
   ],
   imports: [
     CommonModule,

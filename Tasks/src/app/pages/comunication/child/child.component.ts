@@ -14,7 +14,7 @@ export class ChildComponent implements OnInit {
   @Output() mssgFromChild: EventEmitter<string> = new EventEmitter<string>(); 
 
   // Recieve any data from parent component
-  @Input() mssgFromParent: string = '';
+  @Input() mssgFromParent!: String;
 
   // variable used to send info to the parent component by Input
   // childMssg: string = '';
