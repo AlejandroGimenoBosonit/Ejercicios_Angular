@@ -12,7 +12,9 @@
 
     <!-- counts component -->
     <div class="counts-container m-5">
-        <app-counts [setTo]="setTo" class="flex justify-content-center"></app-counts>
+        <app-counts [setTo]="setTo" 
+                    (step)="getInputSignal($event)"
+                    class="flex justify-content-center"></app-counts>
     </div>
 </p-card>
 

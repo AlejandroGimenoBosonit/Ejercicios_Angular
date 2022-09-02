@@ -1,13 +1,24 @@
 <div>
     <div class="flex flex-column mx-8" >
         <label for="dataFromParent">Set To</label>
-        <!-- Input elements recieves the counter initial value-->
-        <input type="text" class="form-control" id="dataFromParent" [placeholder]="setTo" disabled>
+        <input  type="text" 
+                class="form-control" 
+                id="dataFromParent" 
+                [placeholder]="setTo" 
+                disabled>
     </div>
 
     <div class="flex flex-column mx-8 my-3" >
         <label for="stepToParent">Step</label>
-        <!-- Input element add numbers to the counter's count -->
-        <input type="number" class="form-control" id="stepToParent" >
+        <input  type="number"
+
+                #myForm
+                (keyup)="getInputSignal()"
+
+                value="1"
+
+                class="form-control" 
+                id="stepToParent"
+                >
     </div>
 </div>
