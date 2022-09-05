@@ -1,0 +1,24 @@
+<div>
+    <div class="flex flex-column mx-8" >
+        <label for="dataFromParent">Set To</label>
+        <input  type="text" 
+                class="form-control" 
+                id="dataFromParent" 
+                [placeholder]="setTo" 
+                disabled>
+    </div>
+
+    <div class="flex flex-column mx-8 my-3" >
+        <label for="stepToParent">Step</label>
+        <input  type="number"
+
+                #myForm
+                (keyup)="getInputSignal()"
+
+                value="1"
+
+                class="form-control" 
+                id="stepToParent"
+                >
+    </div>
+</div>

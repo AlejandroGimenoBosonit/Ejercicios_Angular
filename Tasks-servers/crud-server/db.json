@@ -1,3 +1,13 @@
 {
-  "users": []
+  "users": [
+    {
+      "username": "Alejandro",
+      "email": "alejandro.gimeno@bosonit.com",
+      "password1": "123456",
+      "subscribed": true,
+      "country": "Spain",
+      "countryCity": "Valencia",
+      "id": 1
+    }
+  ]
 }

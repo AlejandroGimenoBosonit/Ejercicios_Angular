@@ -11,8 +11,9 @@ import { ComunicationService } from 'src/app/pages/comunication/services/comunic
 export class ParentComponent implements OnInit {
 
   // Sent this variable by input decorator in child's component
-  parentMssg: string = '';
- 
+  // Create a new data every time that we sent the message
+  parentMssg!: String;
+
   // variable used to send info to the child component by Input
   childMssg: string = '';
 
@@ -54,7 +55,7 @@ export class ParentComponent implements OnInit {
   ///////////////////////////////////////////////////////////////////////////////////////////////
   useInput() {
     // Update mssgFromChild with the message that we want to send to the child component
-    this.parentMssg = this.parentMssgInput;
+    this.parentMssg = new String(this.parentMssgInput);
   }
   ///////////////////////////////////////////////////////////////////////////////////////////////
   useObservable() {
