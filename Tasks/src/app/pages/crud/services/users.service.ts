@@ -37,7 +37,7 @@ export class UsersService implements AsyncValidator {
     // make a request to json-server to check emails
     return this
           .http
-          .get<any[]>(` ${this._jsonServer}/users?q=${email}`)
+          .get<formControls[]>(` ${this._jsonServer}/users?q=${email}`)
           .pipe(
             // delay only for undertand form's state
             // delay(3000),
@@ -50,7 +50,13 @@ export class UsersService implements AsyncValidator {
 
   fromDeleteToTable(users: formControls[], id: number): void {
 
-    this._users = users.splice(users.indexOf(users.find((element)=>element.id===id)!));
+    this._users = users.splice(
+        users.indexOf(
+          users.find(
+            (element)=>element.id===id
+          )!
+        )
+      );
 
     this._users$.next(this._users);
   }
@@ -78,16 +84,6 @@ export class UsersService implements AsyncValidator {
   getContentToForm(): Observable<formControls> {
     return this._tableContent$.asObservable();
   }
-
-
-
-
-
-
-
-
-
-
 
 
   // http requests

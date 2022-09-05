@@ -128,7 +128,6 @@ export class FormComponent implements OnInit {
             this.usersService.fromFormToTable(userToEdit);
             // mark all fields as touched
             this.myForm.markAsTouched();
-            console.log('llega');
           })
 
     }else{
@@ -147,7 +146,6 @@ export class FormComponent implements OnInit {
 
             // mark all fields as touched
             this.myForm.markAsTouched();
-            console.log('llega');
             
           });
     }
