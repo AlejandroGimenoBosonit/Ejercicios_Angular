@@ -33,7 +33,7 @@ export class InputComponent implements OnInit {
         })
   }
 
-  pressKey() {
+  pressKey(): void {
     this.debouncer.next( this.name );
   }
   

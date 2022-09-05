@@ -18,7 +18,9 @@
                     (onChange)="togglePower()"
         ></p-checkbox>
         <label class="flex flex-row" for="binary">
-            <div [ngStyle]="{'font-weight': (checked) ? 'bold':null}">On</div>/<div [ngStyle]="{'font-weight': (!checked) ? 'bold':null}">Off</div>
+            <div [ngStyle]="{'font-weight': (checked) ? 'bold':null}">On</div>
+            /
+            <div [ngStyle]="{'font-weight': (!checked) ? 'bold':null}">Off</div>
         </label>
     </div>
 </p-card>

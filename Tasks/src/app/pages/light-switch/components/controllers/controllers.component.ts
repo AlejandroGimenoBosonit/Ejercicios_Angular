@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { trafficLightColors } from '../../interfaces/interfaces';
+import { trafficLightColors, payloadLight } from '../../interfaces/interfaces';
 
 @Component({
   selector: 'app-controllers',
@@ -10,7 +10,7 @@ import { trafficLightColors } from '../../interfaces/interfaces';
 export class ControllersComponent implements OnInit {
 
   // Send on/off signal to the traffic-light
-  @Output() colorSwitch: EventEmitter<string>   = new EventEmitter();
+  @Output() colorSwitch: EventEmitter<payloadLight>   = new EventEmitter();
 
   trafficLightColors: trafficLightColors[] = [
     { name: 'Red'   , value: 1 },
@@ -26,15 +26,13 @@ export class ControllersComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  togglePower() {
+  togglePower(): void {
     this.checked = !this.checked;
   }
 
-  emitColor() {
-    if(this.checked){
-      // on ->emit color
-      this.colorSwitch.emit( this.selectedColor.name );
-    }
+  emitColor(): void {
+    const payload: payloadLight = [ this.selectedColor.name, this.checked ];
+    this.colorSwitch.emit( payload );
   }
 
 }

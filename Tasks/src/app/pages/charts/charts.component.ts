@@ -9,8 +9,8 @@ import { PrimeNGConfig } from 'primeng/api';
 })
 export class ChartsComponent implements OnInit {
 
-  lienarSelector: boolean = false;
-  doubleSelector: boolean = false;
+  lienarSelector  : boolean = false;
+  doubleSelector  : boolean = false;
   doughnutSelector: boolean = false;
 
   constructor( private primeNGConfig: PrimeNGConfig ) { }
@@ -19,7 +19,7 @@ export class ChartsComponent implements OnInit {
     this.primeNGConfig.ripple = true;
   }
 
-  changeStatus(selector: string) {
+  changeStatus(selector: string): void {
     switch(selector){
       case 'lienarSelector':
         this.lienarSelector = !this.lienarSelector;

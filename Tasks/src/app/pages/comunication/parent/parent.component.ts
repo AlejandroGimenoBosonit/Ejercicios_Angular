@@ -44,7 +44,7 @@ export class ParentComponent implements OnInit {
 
    ///////////////////////////////////////////////////////////////////////////////////////////////
   // Using a service
-  useService() {
+  useService(): void {
     /*
     Setting o the child's component childMssg varibale a new value
     This is possible because there are two variables with a Parent and Child Component type and 
@@ -53,12 +53,12 @@ export class ParentComponent implements OnInit {
     this.comunicationService.childComp.mssgFromParent = this.parentMssgSrvc;
   }
   ///////////////////////////////////////////////////////////////////////////////////////////////
-  useInput() {
+  useInput(): void {
     // Update mssgFromChild with the message that we want to send to the child component
     this.parentMssg = new String(this.parentMssgInput);
   }
   ///////////////////////////////////////////////////////////////////////////////////////////////
-  useObservable() {
+  useObservable(): void {
     // call observable method
     this.comunicationObservableService.fromParentToChild( this.parentMssgObsrv );
   }

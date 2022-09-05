@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { payloadLight } from '../../interfaces/interfaces';
 
 @Component({
   selector: 'app-traffic-light',
@@ -29,15 +30,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TrafficLightComponent implements OnInit {
   colorOption           : string  = '';
-  defaultColorBackground: string  = 'gray';
+  isChecked             : boolean = false;
 
   constructor() { }
 
   ngOnInit(): void {}
 
-  getColor(color: string) {
-    this.colorOption = color;
-    console.log(this.colorOption);
+  getColor (event: payloadLight): void {
+    
+    this.isChecked = event[1];
+    
+    if( !this.isChecked ){
+      this.colorOption = 'gray';
+    } else {
+      this.colorOption = event[0];
+    }
   }
 
 }

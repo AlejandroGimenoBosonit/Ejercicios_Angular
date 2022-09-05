@@ -27,8 +27,6 @@ export class TableComponent implements OnInit {
     this.usersService
         .getFormUser()
         .subscribe( user => {
-          // console.log(user);
-
           // check for update or adding
           const inTable: boolean[] = this.users.map( arrayUser => arrayUser.id === user.id);
           if(inTable.includes(true)){
@@ -54,19 +52,13 @@ export class TableComponent implements OnInit {
 
   }
 
-
   // methods
-  editUserInfo(user: formControls) {
-    // console.log(user);
+  editUserInfo(user: formControls): void {
     // call observable method
     this.usersService.fromTableToForm(user);
   }
 
-
-  deleteUser(id: number) {
-    // request to delete
-    // console.log(id);
-
+  deleteUser(id: number): void {
     //request
     this.usersService
         .deleteUserById( id )

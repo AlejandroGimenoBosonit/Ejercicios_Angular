@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
-import { filter } from 'rxjs';
 import { Filter, Universities } from './interfaces/interfaces';
 import { UniversitiesService } from './services/universities.service';
 
@@ -32,10 +31,7 @@ export class SearchOnTypeComponent implements OnInit {
     this.primeNGConfig.ripple = true;
   }
 
-  updateInputValue(event: string) {
-    // con el valor transmitido y el valor del boton almacenadohago la peticion
-    // console.log(this.filterValue.alpha2Code);
-    // console.log(event);
+  updateInputValue(event: string): void {
     
     if(event !== '' || event === undefined){
       // request
@@ -47,11 +43,9 @@ export class SearchOnTypeComponent implements OnInit {
             this.suggestedUniversities = universities;
           })
     }
-    
-    
   }
 
-  setButtonValue(filterObject:  Filter){
+  setButtonValue(filterObject:  Filter): void{
     // actualizar el valor local del boton pulsado
     this.filterValue = filterObject;
 

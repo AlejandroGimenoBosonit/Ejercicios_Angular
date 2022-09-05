@@ -40,16 +40,7 @@ export class ComunicationObservableService {
     return this._parentMessage$.asObservable();
   }
 
-
-
-
-
-
-
-
-
-
-  fromChildToParent(message: string) {
+  fromChildToParent(message: string): void {
     //update local value
     this._childMessage =  message;
     // notify every observer that it's subscribed that there is a change

@@ -101,12 +101,12 @@ export class FormComponent implements OnInit {
   }
 
    // conditional way to  display error messages
-  validField( field: string ) {
+  validField( field: string ): boolean | undefined {
     return this.myForm.get(field)?.invalid && this.myForm.get(field)?.touched;
   }
 
 
-  submitForm() {
+  submitForm(): void {
 
     const payload: formControls = {
       username    : this.myForm.controls['username'].value,

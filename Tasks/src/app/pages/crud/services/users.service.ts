@@ -48,7 +48,7 @@ export class UsersService implements AsyncValidator {
   }
    
 
-  fromDeleteToTable(users: formControls[], id: number) {
+  fromDeleteToTable(users: formControls[], id: number): void {
 
     this._users = users.splice(users.indexOf(users.find((element)=>element.id===id)!));
 
@@ -60,7 +60,7 @@ export class UsersService implements AsyncValidator {
 
   
   // observable to render a new user in the table
-  fromFormToTable(user: formControls){
+  fromFormToTable(user: formControls): void{
     this._toTable = user;
     this._toTable$.next(this._toTable);
   } 
@@ -71,7 +71,7 @@ export class UsersService implements AsyncValidator {
 
   
   // observable to pass user data from table to form
-  fromTableToForm(user: formControls) {
+  fromTableToForm(user: formControls): void {
     this._tableContent = user;
     this._tableContent$.next( this._tableContent );
   }
