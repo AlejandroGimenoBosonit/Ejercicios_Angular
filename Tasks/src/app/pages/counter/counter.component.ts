@@ -1,5 +1,5 @@
-import { Component, AfterViewChecked, OnInit } from '@angular/core';
-import { interval, Observable, of, takeUntil, timer, Subject, count, scan } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { takeUntil, timer, Subject, scan } from 'rxjs';
 import { Counter } from './interface/interfaces';
 
 @Component({
@@ -80,7 +80,7 @@ export class CounterComponent implements OnInit {
   }
 
   getInputSignal(number: any): void {
-    console.log(number);
+    // console.log(number);
     this.counterData.step = number;
   }
 }
