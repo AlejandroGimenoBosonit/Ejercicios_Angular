@@ -1,3 +1,5 @@
+import { FormGroup } from "@angular/forms";
+
 export interface CountryName {
     name: Name;
 }
@@ -27,4 +29,3 @@ export interface formControls {
     countryCity : string;
     id?         : number;
 }
-

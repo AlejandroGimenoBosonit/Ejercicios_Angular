@@ -5,6 +5,7 @@ import { ComunicationService } from 'src/app/pages/comunication/services/comunic
 @Component({
   selector: 'app-parent',
   templateUrl: './parent.component.html',
+  providers: [ComunicationService],
   styles: [
   ]
 })
@@ -50,7 +51,9 @@ export class ParentComponent implements OnInit {
     This is possible because there are two variables with a Parent and Child Component type and 
     every component links their properties with them in the inInit
     */
-    this.comunicationService.childComp.mssgFromParent = this.parentMssgSrvc;
+    // this.comunicationService.childComp.mssgFromParent = this.parentMssgSrvc;
+    console.log( this.comunicationService.childComp );
+    
   }
   ///////////////////////////////////////////////////////////////////////////////////////////////
   useInput(): void {

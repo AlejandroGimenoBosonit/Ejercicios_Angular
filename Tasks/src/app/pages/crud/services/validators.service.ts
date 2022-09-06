@@ -30,7 +30,7 @@ export class ValidatorsService {
     -   -> Matches a '-' character (char code 45)
   5-> \\. -> Matches a '.'
   */
-  emailInputPattern : string = environment.emailInputPattern;
+  emailInputPattern : string = '^[a-zA-Z0-9._%+-]+@[a-z0-9._]+\\.[a-z]{2,4}$';
 
 
   constructor() { }

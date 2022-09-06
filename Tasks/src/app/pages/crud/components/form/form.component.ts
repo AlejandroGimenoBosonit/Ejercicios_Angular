@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CountriesService } from '../../services/countries.service';
-import { ValidatorsService } from '../../services/validators.service';
-import { UsersService } from '../../services/users.service';
 import { formControls } from '../../interfaces/interfaces';
-
+import { CountriesService } from '../../services/countries.service';
+import { UsersService } from '../../services/users.service';
+import { ValidatorsService } from '../../services/validators.service';
 
 @Component({
   selector: 'app-form',
@@ -13,76 +12,53 @@ import { formControls } from '../../interfaces/interfaces';
     p-card {
       width: 450px;
     }
+    .table-component {
+      width: 100%;
+    }
   `]
 })
 export class FormComponent implements OnInit {
 
-  editMode      : boolean = false;
+  editMode      : boolean   = false;
+  countries     : string[]  = [];
+  selectedCity  : string    = '';
+
   identifier!   : number;
   userFromTable!: formControls;
-  // countries
-  countries     : string[] = [];
-  selectedCity  : string   = '';
+  users!        : formControls[];
 
-  // form Group
-  myForm: FormGroup = this.fb.group({
-    username    : [ '',     [Validators.required]],
-    email       : [ '',     [Validators.required, Validators.pattern( this.validations.emailInputPattern)], [this.usersService]],
-    password1   : [ '',     [Validators.required, Validators.minLength(6)] ],
-    password2   : [ '',     [Validators.required] ],
-    subscribed  : [ false,  [Validators.required] ],
-    country     : [ '',     [Validators.required] ],
-    countryCity : [ '',     [Validators.required] ],
-  },
-  {
-    validators  : [this.validations.passMatches( 'password1', 'password2' )]
-  }
+  myForm        : FormGroup = this.fb.group(
+    {
+      username    : [ '',     [Validators.required] ],
+      email       : [ '',     [Validators.required, Validators.pattern( this.validations.emailInputPattern)], [this.usersService]],
+      password1   : [ '',     [Validators.required, Validators.minLength(6)] ],
+      password2   : [ '',     [Validators.required] ],
+      subscribed  : [ false,  [Validators.required] ],
+      country     : [ '',     [Validators.required] ],
+      countryCity : [ '',     [Validators.required] ],
+    },
+    {
+      validators  : [this.validations.passMatches( 'password1', 'password2' )]
+    }
   );
 
-  
   constructor(
-    private countriesService  : CountriesService,     //service to get countries
+    private countriesService  : CountriesService,     // service to get countries
     private fb                : FormBuilder,          // reactive form injection
     private validations       : ValidatorsService,    // validation service
     private usersService      : UsersService          // email validation service
   ) { }
 
   ngOnInit(): void {
+    // get users
+    this.getUsers();
+
     // subscribe to countrie's request
     this.countriesService
         .searchCountries()
         .subscribe( (countries) => {
           // Need new array of countrie's names
           this.countries = countries.map( country =>  country.name.common).sort();
-        })
-    // subscribe to table observable
-    this.usersService
-        .getContentToForm()
-        .subscribe( userToEdit => {
-
-          this.editMode = true;
-
-          const {id} = userToEdit;
-          this.identifier = id!;
-
-          const { username, email, password1, subscribed, country, countryCity } = userToEdit;
-
-          // console.log(this.myForm.controls);
-          
-          this.myForm= this.fb.group({
-            username    : [ username,     [Validators.required]],
-            email       : [ email,     [Validators.required, Validators.pattern( this.validations.emailInputPattern)]],
-            password1   : [ password1,     [Validators.required, Validators.minLength(6)] ],
-            password2   : [ password1,     [Validators.required] ],
-            subscribed  : [ subscribed,  [Validators.required] ],
-            country     : [ country,     [Validators.required] ],
-            countryCity : [ countryCity,     [Validators.required] ],
-          },
-          {
-            validators  : [this.validations.passMatches( 'password1', 'password2' )]
-          }
-          );
-          
         })
   }
 
@@ -107,49 +83,91 @@ export class FormComponent implements OnInit {
 
 
   submitForm(): void {
-
-    const payload: formControls = {
-      username    : this.myForm.controls['username'].value,
-      email       : this.myForm.controls['email'].value,
-      password1   : this.myForm.controls['password1'].value,
-      subscribed  : this.myForm.controls['subscribed'].value,
-      country     : this.myForm.controls['country'].value,
-      countryCity : this.myForm.controls['countryCity'].value
-    }
-
-
-    if(this.editMode){
-      // edit mode
-      
+    // requests
+    if( this.editMode ){
+      // edit
       this.usersService
-          .updateUser( payload, this.identifier )
-          .subscribe( (userToEdit) => {
-            console.log(userToEdit);
-            this.usersService.fromFormToTable(userToEdit);
-            // mark all fields as touched
-            this.myForm.markAsTouched();
+          .updateUser(this.myForm.value)
+          .subscribe(
+          {
+            next:   () => {
+              console.log("User updated successdully");
+              this.getUsers();
+              this.myForm.reset();
+            },
+            error:  error => {
+              console.error("error");
+              this.myForm.reset();
+            }
           })
-
     }else{
       // add mode
       this.usersService
-          .postUser( payload )
-          .subscribe( (userForm)=> {
-            // console.log(data);
-
-
-            
-            // calling a service method to subscribe to any changes
-            this.usersService.fromFormToTable(userForm);
-
-
-
-            // mark all fields as touched
-            this.myForm.markAsTouched();
-            
-          });
+          .postUser( this.myForm.value )
+          .subscribe({
+            next:   () => {
+              console.log("User posted successdully");
+              this.getUsers();
+              this.myForm.reset();
+            },
+            error:  error => {
+              console.error(error);
+              this.myForm.reset();
+            }
+          })
     }
-    this.myForm.reset();
-    
   }
+
+  getUsers() {
+    this.usersService
+        .getUsers()
+        .subscribe( users => {
+          this.users = users;
+        });
+  }
+
+  operateAction(event: formControls | number) {
+
+    if(typeof(event) === 'number'){
+      // delete mode
+      this.usersService
+          .deleteUserById( event )
+          .subscribe({
+            next:   () => {
+              console.log("User updated successdully");
+              this.getUsers();
+              this.myForm.reset();
+            },
+            error:  error => {
+              console.error(error);
+              this.myForm.reset();
+            }
+          })
+    }else{
+      // edit mode
+      const { username, email, password1, subscribed, country, countryCity, id } = event;
+      // load info into form
+      this.myForm = this.fb.group(
+        {
+          username    : [ username,   [Validators.required]],
+          email       : [ email,      [Validators.required, Validators.pattern( this.validations.emailInputPattern)]],
+          password1   : [ password1,  [Validators.required, Validators.minLength(6)] ],
+          password2   : [ password1,  [Validators.required] ],
+          subscribed  : [ subscribed, [Validators.required] ],
+          country     : [ country,    [Validators.required] ],
+          countryCity : [ countryCity,[Validators.required] ],
+          id          : [ id ]
+        },
+        {
+          validators  : [this.validations.passMatches( 'password1', 'password2' )]
+        }
+      );
+
+      // update mode
+      this.editMode = true;
+    }    
+  }
+
+
+
 }

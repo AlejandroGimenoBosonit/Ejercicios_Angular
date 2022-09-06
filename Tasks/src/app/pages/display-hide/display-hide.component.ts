@@ -11,11 +11,11 @@ export class DisplayHideComponent implements OnInit {
 
   hide: boolean = false;
 
-  constructor() { }
+  // constructor() { }
 
   ngOnInit(): void {
   }
 
-  toggleImage(): void { this.hide = !this.hide }
+  toggleImage() { this.hide = !this.hide }
 
 }

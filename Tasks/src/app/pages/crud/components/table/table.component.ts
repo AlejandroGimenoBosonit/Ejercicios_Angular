@@ -1,71 +1,40 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { formControls } from '../../interfaces/interfaces';
-import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
-  styles: [
-  ]
+  styles: [`
+    p-card {
+      width: 450px;
+    }
+    .card-table {
+      width: 100%;
+    }
+  `]
 })
 export class TableComponent implements OnInit {
 
-  users: formControls[] = [];
 
-  constructor(
-    private usersService: UsersService          // email validation service
-  ) {}
+  @Input()  users!      : formControls[];
+  @Output() action      : EventEmitter<formControls | number> = new EventEmitter<formControls | number>();
+
+  constructor() {}
 
   ngOnInit(): void {
-
-    this.usersService
-        .getUsers()
-        .subscribe( users => {
-          this.users = users;
-        });
-         
-    this.usersService
-        .getFormUser()
-        .subscribe( user => {
-          // check for update or adding
-          const inTable: boolean[] = this.users.map( arrayUser => arrayUser.id === user.id);
-          if(inTable.includes(true)){
-            // edit mode
-            const userArr = [user];
-            const newArr = this.users.map( obj => userArr.find(o => o.id===obj.id) || obj );
-
-            this.users = newArr;
-
-          }else{
-            // adding mode
-            this.users.push(user);
-          }
-        })
-
-    this.usersService
-        .getUsersToTable()
-        .subscribe(data => {
-          console.log(data);
-          
-        })
-
-
+    // console.log(this.users.length); 
   }
 
   // methods
   editUserInfo(user: formControls): void {
-    // call observable method
-    this.usersService.fromTableToForm(user);
+    // update output to be emitted
+    this.action.emit( user );
   }
 
   deleteUser(id: number): void {
-    //request
-    this.usersService
-        .deleteUserById( id )
-        .subscribe(() => {
-          // next delete
-          this.usersService.fromDeleteToTable(this.users, id);
-        });
-    
+    // update output to be emitted
+    this.action.emit( id );
   }
+
+
 }

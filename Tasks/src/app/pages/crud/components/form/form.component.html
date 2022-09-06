@@ -1,7 +1,9 @@
 
-<div class="grid">
+<div class=" flex flex-row flex-wrap justify-content-center ">
 
-    <p-card class="col-12 md:col-12 lg:col-fixed" header="Register Form">
+    <p-card header="Register Form"
+            class="flex flex-row flex-wrap justify-content-center my-3"
+    >
         <hr>
         <div class="row">
             <div class="col m-3">
@@ -156,9 +158,9 @@
         </div>
     </p-card>  
 
-    <div class="col-12 lg:col">
+    <div class="flex flex-row flex-wrap justify-content-center table-container my-3">
         <!-- Pass user via input to the table -->
-        <app-table ></app-table>
+        <app-table class="table-component" *ngIf="users?.length" [users]="users"  (action)="operateAction($event)"></app-table>
     </div>
 </div>
 

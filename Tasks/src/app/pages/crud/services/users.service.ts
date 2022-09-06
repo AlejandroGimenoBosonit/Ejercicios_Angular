@@ -32,7 +32,6 @@ export class UsersService implements AsyncValidator {
   validate(control: AbstractControl<any, any>): Observable<ValidationErrors | null> {
     
     const email: string = control.value;
-    // console.log(email);
     
     // make a request to json-server to check emails
     return this
@@ -48,61 +47,58 @@ export class UsersService implements AsyncValidator {
   }
    
 
-  fromDeleteToTable(users: formControls[], id: number): void {
+  // fromDeleteToTable(users: formControls[], id: number): void {
 
-    this._users = users.splice(
-        users.indexOf(
-          users.find(
-            (element)=>element.id===id
-          )!
-        )
-      );
+  //   this._users = users.splice(
+  //       users.indexOf(
+  //         users.find(
+  //           (element)=>element.id===id
+  //         )!
+  //       )
+  //     );
 
-    this._users$.next(this._users);
-  }
-  getUsersToTable():Observable<formControls[]> {
-    return this._users$.asObservable();
-  }
-
-  
-  // observable to render a new user in the table
-  fromFormToTable(user: formControls): void{
-    this._toTable = user;
-    this._toTable$.next(this._toTable);
-  } 
-  getFormUser(): Observable<formControls>{
-    return this._toTable$.asObservable();
-  }
-  
+  //   this._users$.next(this._users);
+  // }
+  // getUsersToTable():Observable<formControls[]> {
+  //   return this._users$.asObservable();
+  // }
 
   
-  // observable to pass user data from table to form
-  fromTableToForm(user: formControls): void {
-    this._tableContent = user;
-    this._tableContent$.next( this._tableContent );
-  }
-  getContentToForm(): Observable<formControls> {
-    return this._tableContent$.asObservable();
-  }
+  // // observable to render a new user in the table
+  // fromFormToTable(user: formControls): void{
+  //   this._toTable = user;
+  //   this._toTable$.next(this._toTable);
+  // } 
+  // getFormUser(): Observable<formControls>{
+  //   return this._toTable$.asObservable();
+  // }
+  
 
+  
+  // // observable to pass user data from table to form
+  // fromTableToForm(user: formControls): void {
+  //   this._tableContent = user;
+  //   this._tableContent$.next( this._tableContent );
+  // }
+  // getContentToForm(): Observable<formControls> {
+  //   return this._tableContent$.asObservable();
+  // }
 
   // http requests
-
-  postUser( payload:  formControls): Observable<formControls> {
-    // console.log(payload);
-    
-    const urlQuery: string = `${this._jsonServer}/users`;
-    return this.http.post<formControls>( urlQuery, payload );
-  }
-
   getUsers(): Observable<formControls[]> {
     return this.http.get<formControls[]>(`${this._jsonServer}/users` );
   }
-
-  updateUser( payload: formControls, id: number ): Observable<formControls>{
+  // 
+  postUser( payload:  formControls): Observable<formControls> {
+      // console.log(payload);
+      
+      const urlQuery: string = `${this._jsonServer}/users`;
+      return this.http.post<formControls>( urlQuery, payload );
+    }
+  updateUser( payload: formControls): Observable<formControls>{
     // console.log(payload);
     
-    const urlQuery: string = `${this._jsonServer}/users/${id}`;
+    const urlQuery: string = `${this._jsonServer}/users/${payload.id}`;
     return this.http.put<formControls>(urlQuery, payload);
   }
 
