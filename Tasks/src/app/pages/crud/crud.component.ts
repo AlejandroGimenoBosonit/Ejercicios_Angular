@@ -1,16 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-crud',
   templateUrl: './crud.component.html',
-  styles: [
-  ]
+  styles: [],
 })
-export class CrudComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class CrudComponent {
+  constructor() {}
 }

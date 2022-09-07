@@ -4,35 +4,31 @@ import { trafficLightColors, payloadLight } from '../../interfaces/interfaces';
 @Component({
   selector: 'app-controllers',
   templateUrl: './controllers.component.html',
-  styles: [
-  ]
+  styles: [],
 })
 export class ControllersComponent implements OnInit {
-
   // Send on/off signal to the traffic-light
-  @Output() colorSwitch: EventEmitter<payloadLight>   = new EventEmitter();
+  @Output() colorSwitch: EventEmitter<payloadLight> = new EventEmitter();
 
   trafficLightColors: trafficLightColors[] = [
-    { name: 'Red'   , value: 1 },
-    { name: 'Ambar' , value: 2 },
-    { name: 'Green' , value: 3 }
+    { name: 'Red', value: 1 },
+    { name: 'Ambar', value: 2 },
+    { name: 'Green', value: 3 },
   ];
 
   selectedColor!: trafficLightColors;
-  checked       : boolean = false;
+  checked: boolean = false;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   togglePower(): void {
     this.checked = !this.checked;
   }
 
   emitColor(): void {
-    const payload: payloadLight = [ this.selectedColor.name, this.checked ];
-    this.colorSwitch.emit( payload );
+    const payload: payloadLight = [this.selectedColor.name, this.checked];
+    this.colorSwitch.emit(payload);
   }
-
 }

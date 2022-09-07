@@ -1,28 +1,33 @@
+<p-card
+  header="Register Form"
+  class="flex align-items-center justify-content-around m-5"
+  [style]="{ width: '360px' }"
+>
+  <div
+    class="container-controller flex align-items-center justify-content-around"
+  >
+    <h5>Controller</h5>
+    <p-dropdown
+      [options]="trafficLightColors"
+      [(ngModel)]="selectedColor"
+      (ngModelChange)="emitColor()"
+      optionLabel="name"
+    ></p-dropdown>
+  </div>
 
-<p-card header="Register Form" class="flex align-items-center justify-content-around m-5" [style]="{width: '360px'}">
-    <div class="container-controller flex align-items-center justify-content-around">
-        <h5>Controller</h5>
-        <p-dropdown [options]="trafficLightColors"
-                    [(ngModel)]="selectedColor"
-                    (ngModelChange)="emitColor()"
-                    placeholder="Select a Color" 
-                    optionLabel="name"
-        ></p-dropdown>
-    </div>
-    
-    <div class="field-checkbox mx-3">
-        
-        <p-checkbox [binary]="true" 
-                    inputId="binary"
-                    name="checked"
-                    (onChange)="togglePower()"
-        ></p-checkbox>
-        <label class="flex flex-row" for="binary">
-            <div [ngStyle]="{'font-weight': (checked) ? 'bold':null}">On</div>
-            /
-            <div [ngStyle]="{'font-weight': (!checked) ? 'bold':null}">Off</div>
-        </label>
-    </div>
+  <div class="field-checkbox mx-3">
+    <p-checkbox
+      [binary]="true"
+      inputId="binary"
+      name="checked"
+      (onChange)="togglePower()"
+    ></p-checkbox>
+    <label class="flex flex-row" for="binary">
+      <div [ngStyle]="{ 'font-weight': checked ? 'bold' : null }">On</div>
+      /
+      <div [ngStyle]="{ 'font-weight': !checked ? 'bold' : null }">Off</div>
+    </label>
+  </div>
 </p-card>
 
 <!-- <pre> {{ checked }} </pre> -->

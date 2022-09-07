@@ -5,16 +5,20 @@ import { Universities } from '../interfaces/interfaces';
 import { environment } from '../../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UniversitiesService {
+  private _univEndPorint: string = environment.jsonServerEndPoint;
 
-  private _univEndPorint: string = environment.jsonServerEndPoint; 
-
-  constructor( private http: HttpClient ) { }
+  constructor(private http: HttpClient) {}
 
   // methods
-  searchUniversities(countryCode: string, center: string): Observable<Universities[]> {
-    return this.http.get<Universities[]>(`${this._univEndPorint}/universities?alpha_two_code=${countryCode}&q=${center}`);
+  searchUniversities(
+    countryCode: string,
+    center: string
+  ): Observable<Universities[]> {
+    return this.http.get<Universities[]>(
+      `${this._univEndPorint}/universities?alpha_two_code=${countryCode}&q=${center}`
+    );
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { formControls } from '../../interfaces/interfaces';
+import { FormBuilder, FormGroup, Validators, FormControl, ValidatorFn } from '@angular/forms';
+import { formControls, PersonalForm } from '../../interfaces/interfaces';
 import { CountriesService } from '../../services/countries.service';
 import { UsersService } from '../../services/users.service';
 import { ValidatorsService } from '../../services/validators.service';
@@ -22,12 +22,12 @@ export class FormComponent implements OnInit {
   editMode      : boolean   = false;
   countries     : string[]  = [];
   selectedCity  : string    = '';
-
   identifier!   : number;
   userFromTable!: formControls;
   users!        : formControls[];
 
-  myForm        : FormGroup = this.fb.group(
+  
+  myForm: FormGroup = this.fb.group(
     {
       username    : [ '',     [Validators.required] ],
       email       : [ '',     [Validators.required, Validators.pattern( this.validations.emailInputPattern)], [this.usersService]],
@@ -42,12 +42,18 @@ export class FormComponent implements OnInit {
     }
   );
 
+
+  
+
   constructor(
     private countriesService  : CountriesService,     // service to get countries
     private fb                : FormBuilder,          // reactive form injection
     private validations       : ValidatorsService,    // validation service
     private usersService      : UsersService          // email validation service
-  ) { }
+  ) {
+    
+    
+   }
 
   ngOnInit(): void {
     // get users
@@ -82,7 +88,7 @@ export class FormComponent implements OnInit {
   }
 
 
-  submitForm(): void {
+  submitForm() {
     // requests
     if( this.editMode ){
       // edit
@@ -92,11 +98,16 @@ export class FormComponent implements OnInit {
           {
             next:   () => {
               console.log("User updated successdully");
+              // update table's content
               this.getUsers();
+              // reset form
               this.myForm.reset();
+              // turn default mode - add mode
+              this.editMode = false;
             },
             error:  error => {
-              console.error("error");
+              console.error(error.message);
+              // reset form
               this.myForm.reset();
             }
           })

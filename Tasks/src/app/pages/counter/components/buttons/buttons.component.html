@@ -1,35 +1,44 @@
 <div class="flex flex-wrap flex-column">
+  <div class="flex flex-wrap flex-row justify-content-center">
+    <button
+      pButton
+      class="flex m-2"
+      type="button"
+      label="Start"
+      (click)="toggleSignal('start')"
+    ></button>
+    <button
+      pButton
+      class="flex m-2"
+      type="button"
+      label="Pause"
+      (click)="toggleSignal('pause')"
+    ></button>
+    <button
+      pButton
+      class="flex m-2"
+      type="button"
+      label="Reset"
+      (click)="toggleSignal('reset')"
+    ></button>
+  </div>
 
-        <div class="flex flex-wrap flex-row justify-content-center">
-                <button pButton class="flex m-2" 
-                        type="button" 
-                        label="Start"
-                        (click)="toggleSignal('start')"
-                ></button>
-                <button pButton class="flex m-2" 
-                        type="button" 
-                        label="Pause"
-                        (click)="toggleSignal('pause')"
-                ></button>
-                <button pButton class="flex m-2" 
-                        type="button" 
-                        label="Reset"
-                        (click)="toggleSignal('reset')"
-                ></button>
-        </div>
+  <br />
 
-        <br>
-
-        <div class="flex flex-wrap flex-row justify-content-center">
-                <button pButton class="flex m-2" 
-                        type="button" 
-                        label="C.Up"
-                        (click)="toggleSignal('cUp')"
-                ></button>
-                <button pButton class="flex m-2" 
-                        type="button" 
-                        label="C.Down"
-                        (click)="toggleSignal('cDown')"
-                ></button>
-        </div>
+  <div class="flex flex-wrap flex-row justify-content-center">
+    <button
+      pButton
+      class="flex m-2"
+      type="button"
+      label="C.Up"
+      (click)="toggleSignal('cUp')"
+    ></button>
+    <button
+      pButton
+      class="flex m-2"
+      type="button"
+      label="C.Down"
+      (click)="toggleSignal('cDown')"
+    ></button>
+  </div>
 </div>

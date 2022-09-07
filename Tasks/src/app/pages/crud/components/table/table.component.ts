@@ -1,40 +1,36 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { formControls } from '../../interfaces/interfaces';
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
-  styles: [`
-    p-card {
-      width: 450px;
-    }
-    .card-table {
-      width: 100%;
-    }
-  `]
+  styles: [
+    `
+      p-card {
+        width: 450px;
+      }
+      .card-table {
+        width: 100%;
+      }
+    `,
+  ],
 })
-export class TableComponent implements OnInit {
-
-
-  @Input()  users!      : formControls[];
-  @Output() action      : EventEmitter<formControls | number> = new EventEmitter<formControls | number>();
+export class TableComponent {
+  @Input() users!: formControls[];
+  @Output() action: EventEmitter<formControls | number> = new EventEmitter<
+    formControls | number
+  >();
 
   constructor() {}
 
-  ngOnInit(): void {
-    // console.log(this.users.length); 
-  }
-
   // methods
-  editUserInfo(user: formControls): void {
+  editUserInfo(user: formControls) {
     // update output to be emitted
-    this.action.emit( user );
+    this.action.emit(user);
   }
 
-  deleteUser(id: number): void {
+  deleteUser(id: number) {
     // update output to be emitted
-    this.action.emit( id );
+    this.action.emit(id);
   }
-
-
 }
