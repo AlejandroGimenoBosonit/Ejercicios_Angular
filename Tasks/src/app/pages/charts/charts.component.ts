@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
+// enum SelectorRype {
+//   linearSelector
+// }
 
 @Component({
   selector: 'app-charts',
@@ -10,6 +13,7 @@ export class ChartsComponent implements OnInit {
   lienarSelector: boolean = false;
   doubleSelector: boolean = false;
   doughnutSelector: boolean = false;
+
 
   constructor(private primeNGConfig: PrimeNGConfig) {}
 

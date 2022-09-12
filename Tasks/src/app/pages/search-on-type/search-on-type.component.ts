@@ -34,7 +34,7 @@ export class SearchOnTypeComponent implements OnInit {
       this.universitiesService
         .searchUniversities(this.filterValue.alpha2Code, inputValue)
         .subscribe((universities) => {
-          console.log(universities);
+          // console.log(universities);
 
           this.suggestedUniversities = universities;
         });

@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Subscription, takeUntil, Subject } from 'rxjs';
 import { ComunicationService } from 'src/app/pages/comunication/services/comunication.service';
 import { ComunicationObservableService } from '../services/comunication-observable.service';
 
@@ -7,7 +8,7 @@ import { ComunicationObservableService } from '../services/comunication-observab
   templateUrl: './child.component.html',
   styles: [],
 })
-export class ChildComponent implements OnInit {
+export class ChildComponent implements OnInit, OnDestroy {
   // Output decorator to send data to the parent component
   @Output() mssgFromChild: EventEmitter<string> = new EventEmitter<string>();
 
@@ -22,6 +23,10 @@ export class ChildComponent implements OnInit {
   childMssgOutput: string = 'CHILD USING OUTPUT';
   childMssgObsrv: string = 'CHILD USING OBSERVABLE';
 
+  subscription!: Subscription;
+
+  alive$ = new Subject<boolean>();
+
   constructor(
     // simple service
     private comunicationService: ComunicationService,
@@ -32,9 +37,24 @@ export class ChildComponent implements OnInit {
   ngOnInit(): void {
     this.comunicationService.childComp = this;
     // subscribe to the observable
-    this.comunicationObservableService.getParentMessage$().subscribe((mssg) => {
+     this.subscription = this.comunicationObservableService.getParentMessage$()
+     .pipe(
+      takeUntil( this.alive$ )
+     )
+     .subscribe((mssg) => {
       this.mssgFromParent = mssg;
+      console.log(mssg);
+      
     });
+  }
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    // forma 1
+    // this.subscription.unsubscribe();
+    // form 2 (subject)
+    this.alive$.next(true);
+    this.alive$.complete();
   }
 
   // methods

@@ -6,8 +6,8 @@
       class="traffic-light red"
       [ngStyle]="{
         'background-color':
-          this.formOptions.value.selected === '1' &&
-          this.formOptions.value.power
+          formOptions.value.selected === '1' &&
+          formOptions.value.power
             ? 'red'
             : 'gray'
       }"
@@ -17,8 +17,8 @@
       class="traffic-light ambar"
       [ngStyle]="{
         'background-color':
-          this.formOptions.value.selected === '2' &&
-          this.formOptions.value.power
+          formOptions.value.selected === '2' &&
+          formOptions.value.power
             ? '#FFBF00'
             : 'gray'
       }"
@@ -28,8 +28,8 @@
       class="traffic-light green"
       [ngStyle]="{
         'background-color':
-          this.formOptions.value.selected === '3' &&
-          this.formOptions.value.power
+          formOptions.value.selected === '3' &&
+          formOptions.value.power
             ? 'green'
             : 'gray'
       }"

@@ -16,6 +16,8 @@ export class ParentComponent implements OnInit {
   // variable used to send info to the child component by Input
   childMssg: string = '';
 
+  isChild: boolean = true;
+
   // Parent Messages
   parentMssgSrvc: string = 'PARENT USING SERVICE';
   parentMssgInput: string = 'PARENT USING INPUT';
@@ -68,5 +70,9 @@ export class ParentComponent implements OnInit {
   //"(mssgFromChild)="getMssgFromChild($event)"
   getMssgFromChild(event: string) {
     this.childMssg = event;
+  }
+
+  toggleChild() {
+    this.isChild = !this.isChild;
   }
 }

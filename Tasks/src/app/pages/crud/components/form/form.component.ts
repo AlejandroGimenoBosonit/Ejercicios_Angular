@@ -1,13 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
+  FormControl,
   FormGroup,
+  NonNullableFormBuilder,
   Validators
 } from '@angular/forms';
 import { formControls } from '../../interfaces/interfaces';
 import { CountriesService } from '../../services/countries.service';
 import { UsersService } from '../../services/users.service';
 import { ValidatorsService } from '../../services/validators.service';
+
+// interface LoginForm {
+//   email: FormControl<string>;
+//   password?: FormControl<string>;
+// }
 
 @Component({
   selector: 'app-form',
@@ -23,13 +30,21 @@ import { ValidatorsService } from '../../services/validators.service';
     `,
   ],
 })
+
+
 export class FormComponent implements OnInit {
+
+  
   editMode: boolean = false;
   countries: string[] = [];
   selectedCity: string = '';
   identifier!: number;
   userFromTable!: formControls;
   users!: formControls[];
+
+  // myLogin: FormGroup<LoginForm> = this.fb.group({
+  //   email: new FormControl('',[Validators.required])
+  // })
 
   myForm: FormGroup = this.fb.group(
     {
@@ -44,7 +59,7 @@ export class FormComponent implements OnInit {
       ],
       password1: ['', [Validators.required, Validators.minLength(6)]],
       password2: ['', [Validators.required]],
-      subscribed: [false, [Validators.required]],
+      subscribed: [false],
       country: ['', [Validators.required]],
       countryCity: ['', [Validators.required]],
     },
@@ -55,7 +70,7 @@ export class FormComponent implements OnInit {
 
   constructor(
     private countriesService: CountriesService, // service to get countries
-    private fb: FormBuilder, // reactive form injection
+    private fb: NonNullableFormBuilder, // reactive form injection
     private validations: ValidatorsService, // validation service
     private usersService: UsersService // email validation service
   ) {}

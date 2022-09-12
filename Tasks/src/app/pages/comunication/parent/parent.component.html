@@ -26,10 +26,17 @@
           label="Use Observable"
           (click)="useObservable()"
         ></button>
+        <button
+          pButton
+          class="flex flex-1 align-items-center justify-content-center m-2"
+          label="toggle child"
+          (click)="toggleChild()"
+        ></button>
       </div>
       <!-- child fieldset -->
       <!-- sending by input a message form parent to child -->
       <app-child
+        *ngIf="isChild"
         [mssgFromParent]="parentMssg"
         (mssgFromChild)="getMssgFromChild($event)"
       ></app-child>

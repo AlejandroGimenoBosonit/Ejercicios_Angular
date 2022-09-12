@@ -1,22 +1,27 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ComunicationObservableService {
+
+  
   // variable as observable
   private _parentMessage!: string;
   private _childMessage!: string;
 
   // subject observer to me multicasted to manu observers
   // It will emit a string
-  private _parentMessage$: Subject<string>;
+  public _parentMessage$ = new BehaviorSubject<string>('');
+
+
+  
   private _childMessage$: Subject<string>;
 
   constructor() {
     this._parentMessage = '';
-    this._parentMessage$ = new Subject();
+    // this._parentMessage$ = new Subject();
 
     this._childMessage = '';
     this._childMessage$ = new Subject();

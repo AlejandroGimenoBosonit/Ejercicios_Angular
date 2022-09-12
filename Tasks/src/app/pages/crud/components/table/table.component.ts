@@ -6,8 +6,8 @@ import { formControls } from '../../interfaces/interfaces';
   templateUrl: './table.component.html',
   styles: [
     `
-      p-card {
-        width: 450px;
+      .table-container {
+        width: 100%;
       }
       .card-table {
         width: 100%;

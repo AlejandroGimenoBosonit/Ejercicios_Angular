@@ -1,6 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { trafficLightColors, payloadLight } from '../../interfaces/interfaces';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-controllers',
@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styles: [],
 })
 export class ControllersComponent implements OnInit {
+
   // Send on/off signal to the traffic-light
   // @Output() emitter: EventEmitter<any> = new EventEmitter();
 
