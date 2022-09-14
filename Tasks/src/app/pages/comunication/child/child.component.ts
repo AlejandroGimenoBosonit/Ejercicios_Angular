@@ -36,8 +36,10 @@ export class ChildComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.comunicationService.childComp = this;
+
+
     // subscribe to the observable
-     this.subscription = this.comunicationObservableService.getParentMessage$()
+    this.comunicationObservableService.getParentMessage$()
      .pipe(
       takeUntil( this.alive$ )
      )
