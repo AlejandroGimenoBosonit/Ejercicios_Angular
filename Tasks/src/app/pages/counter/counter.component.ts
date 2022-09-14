@@ -74,9 +74,9 @@ export class CounterComponent implements OnInit {
     // check for count down or up
     if(this.counterData.countUp){
       return accurate+this.counterData.step;
-    }else{
-      return accurate-this.counterData.step;
     }
+    return accurate-this.counterData.step;
+    
   }
 
   getInputSignal(number: any): void {

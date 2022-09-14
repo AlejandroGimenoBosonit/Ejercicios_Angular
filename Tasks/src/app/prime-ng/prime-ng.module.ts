@@ -1,17 +1,16 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {DropdownModule} from 'primeng/dropdown';
-import {MenubarModule} from 'primeng/menubar';
-import {CardModule} from 'primeng/card';
-import {ButtonModule} from 'primeng/button';
-import {FieldsetModule} from 'primeng/fieldset';
-import {TableModule} from 'primeng/table';
-import {InputTextModule} from 'primeng/inputtext';
-import {SelectButtonModule} from 'primeng/selectbutton';
-import {CheckboxModule} from 'primeng/checkbox';
-import {ChartModule} from 'primeng/chart';
-
-import {RippleModule} from 'primeng/ripple';
+import { NgModule } from '@angular/core';
+import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
+import { ChartModule } from 'primeng/chart';
+import { CheckboxModule } from 'primeng/checkbox';
+import { DropdownModule } from 'primeng/dropdown';
+import { FieldsetModule } from 'primeng/fieldset';
+import { InputTextModule } from 'primeng/inputtext';
+import { MenubarModule } from 'primeng/menubar';
+import { RippleModule } from 'primeng/ripple';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [],

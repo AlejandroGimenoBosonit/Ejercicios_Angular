@@ -1,26 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
+// enum SelectorRype {
+//   linearSelector
+// }
 
 @Component({
   selector: 'app-charts',
   templateUrl: './charts.component.html',
-  styles: [
-  ]
+  styles: [],
 })
 export class ChartsComponent implements OnInit {
-
-  lienarSelector  : boolean = false;
-  doubleSelector  : boolean = false;
+  lienarSelector: boolean = false;
+  doubleSelector: boolean = false;
   doughnutSelector: boolean = false;
 
-  constructor( private primeNGConfig: PrimeNGConfig ) { }
+
+  constructor(private primeNGConfig: PrimeNGConfig) {}
 
   ngOnInit(): void {
     this.primeNGConfig.ripple = true;
   }
 
   changeStatus(selector: string): void {
-    switch(selector){
+    switch (selector) {
       case 'lienarSelector':
         this.lienarSelector = !this.lienarSelector;
         break;
@@ -32,5 +34,4 @@ export class ChartsComponent implements OnInit {
         break;
     }
   }
-
 }

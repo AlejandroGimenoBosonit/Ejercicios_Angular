@@ -1,19 +1,38 @@
-<p-card class="flex align-items-center justify-content-center">
-    <!-- panel -->
-    <div class="panel">
-        <!-- red light -->
-        <span   class="traffic-light red" 
-                [ngStyle]="{'background-color': (colorOption==='Red') ? 'red':'gray'}"
-        ></span>
-        <!-- ambar light -->
-        <span   class="traffic-light ambar" 
-                [ngStyle]="{'background-color': (colorOption==='Ambar') ? '#FFBF00':'gray'}"
-        ></span>
-        <!-- green light -->
-        <span   class="traffic-light green" 
-                [ngStyle]="{'background-color': (colorOption==='Green') ? 'green':'gray'}"
-        ></span>
-    </div>
+<p-card class="flex align-items-center justify-content-evenly">
+  <!-- panel -->
+  <div class="panel">
+    <!-- red light -->
+    <span
+      class="traffic-light red"
+      [ngStyle]="{
+        'background-color':
+          formOptions.value.selected === '1' &&
+          formOptions.value.power
+            ? 'red'
+            : 'gray'
+      }"
+    ></span>
+    <!-- ambar light -->
+    <span
+      class="traffic-light ambar"
+      [ngStyle]="{
+        'background-color':
+          formOptions.value.selected === '2' &&
+          formOptions.value.power
+            ? '#FFBF00'
+            : 'gray'
+      }"
+    ></span>
+    <!-- green light -->
+    <span
+      class="traffic-light green"
+      [ngStyle]="{
+        'background-color':
+          formOptions.value.selected === '3' &&
+          formOptions.value.power
+            ? 'green'
+            : 'gray'
+      }"
+    ></span>
+  </div>
 </p-card>
-
-<app-controllers  (colorSwitch)="getColor($event)"></app-controllers>

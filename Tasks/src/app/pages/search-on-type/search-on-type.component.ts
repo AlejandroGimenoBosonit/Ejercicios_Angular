@@ -6,55 +6,43 @@ import { UniversitiesService } from './services/universities.service';
 @Component({
   selector: 'app-search-on-type',
   templateUrl: './search-on-type.component.html',
-  styles: [
-  ]
+  styles: [],
 })
 export class SearchOnTypeComponent implements OnInit {
-
-  filterOptions!        : Filter[];
-  filterValue!          : Filter; // button value
-  inputValue!           : string;
-  suggestedUniversities : Universities[] = [];
+  filterOptions!: Filter[];
+  filterValue!: Filter; // button value
+  suggestedUniversities: Universities[] = [];
 
   constructor(
-    private primeNGConfig       : PrimeNGConfig,
-    private universitiesService : UniversitiesService
-  ) { 
+    private primeNGConfig: PrimeNGConfig,
+    private universitiesService: UniversitiesService
+  ) {
     this.filterOptions = [
-      {name: "Spain"          , alpha2Code: 'ES'},
-      {name: "United Kingdom" , alpha2Code: 'GB'},
-      {name: "Portugal"       , alpha2Code: 'PT'}
+      { name: 'Spain', alpha2Code: 'ES' },
+      { name: 'United Kingdom', alpha2Code: 'GB' },
+      { name: 'Portugal', alpha2Code: 'PT' },
     ];
-   }
+  }
 
   ngOnInit(): void {
     this.primeNGConfig.ripple = true;
   }
 
-  updateInputValue(event: string): void {
-    
-    if(event !== '' || event === undefined){
+  updateInputValue(inputValue: string) {
+    if (inputValue !== '') {
       // request
       this.universitiesService
-          .searchUniversities( this.filterValue.alpha2Code, event )
-          .subscribe( universities => {
-            console.log(universities);
-            
-            this.suggestedUniversities = universities;
-          })
+        .searchUniversities(this.filterValue.alpha2Code, inputValue)
+        .subscribe((universities) => {
+          // console.log(universities);
+
+          this.suggestedUniversities = universities;
+        });
     }
   }
 
-  setButtonValue(filterObject:  Filter): void{
+  setButtonValue(filterObject: Filter) {
     // actualizar el valor local del boton pulsado
     this.filterValue = filterObject;
-
-
-
-
-    
-
-    
   }
-
 }

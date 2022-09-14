@@ -3,10 +3,9 @@ import { AbstractControl, FormControl, ValidationErrors } from '@angular/forms';
 import { environment } from '../../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ValidatorsService {
-
   // RegEx patterns to validate name and email
   // ()-> name space () -> last_name
   // [a-zA-Z]+ ==> [every character from a to z and A to Z]additional_characters
@@ -30,37 +29,36 @@ export class ValidatorsService {
     -   -> Matches a '-' character (char code 45)
   5-> \\. -> Matches a '.'
   */
-  emailInputPattern : string = '^[a-zA-Z0-9._%+-]+@[a-z0-9._]+\\.[a-z]{2,4}$';
+  emailInputPattern: string = '^[a-zA-Z0-9._%+-]+@[a-z0-9._]+\\.[a-z]{2,4}$';
 
-
-  constructor() { }
+  constructor() {}
 
   // custom validations
-  cannotBeStrider( control: FormControl ): ValidationErrors | null {
+  cannotBeStrider(control: FormControl): ValidationErrors | null {
     const value: string = control.value?.trim().toLowerCase();
 
-    if( value === 'strider' ) {
-      return {noStrider: true} // error case
+    if (value === 'strider') {
+      return { noStrider: true }; // error case
     }
     return null; //if validation is success
   }
 
   // password validator
-  passMatches( passField1: string, passField2: string ) {
-    return ( formGroup: AbstractControl ) => {
+  passMatches(passField1: string, passField2: string) {
+    return (formGroup: AbstractControl) => {
       const pass1 = formGroup.get(passField1)?.value;
       const pass2 = formGroup.get(passField2)?.value;
 
-      if( pass1 !== pass2 ){
+      if (pass1 !== pass2) {
         // console.log(pass1, pass2);
-        
+
         //set error as not equals
-        formGroup.get(passField2)?.setErrors({notEquals: true});
-        return {notEquals: true};
+        formGroup.get(passField2)?.setErrors({ notEquals: true });
+        return { notEquals: true };
       }
       //set error as null if success
       formGroup.get(passField2)?.setErrors(null);
       return null;
-    }
+    };
   }
 }

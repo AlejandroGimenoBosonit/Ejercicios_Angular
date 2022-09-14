@@ -1,21 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-display-hide',
   templateUrl: './display-hide.component.html',
-  styles: [
-  ]
+  styles: [],
 })
-export class DisplayHideComponent implements OnInit {
-  
-
+export class DisplayHideComponent {
   hide: boolean = false;
 
-  // constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
+  toggleImage() {
+    this.hide = !this.hide;
   }
-
-  toggleImage() { this.hide = !this.hide }
-
 }

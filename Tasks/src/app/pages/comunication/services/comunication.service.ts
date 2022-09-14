@@ -4,11 +4,8 @@ import { ChildComponent } from '../child/child.component';
 
 @Injectable()
 export class ComunicationService {
+  public parentComp!: ParentComponent;
+  public childComp!: ChildComponent;
 
-  public parentComp !: ParentComponent;
-  public childComp  !: ChildComponent;
-
-  constructor() { }
-
-  
+  constructor() {}
 }

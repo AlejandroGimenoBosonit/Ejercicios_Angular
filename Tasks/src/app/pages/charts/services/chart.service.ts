@@ -5,15 +5,14 @@ import { DataCollection } from '../interfaces/interface';
 import { environment } from '../../../../environments/environment.prod';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ChartService {
-
   private _chartEndPoint: string = environment.jsonServerEndPoint;
 
   constructor(private http: HttpClient) {}
 
-  getDataSets(): Observable<DataCollection>{
+  getDataSets(): Observable<DataCollection> {
     return this.http.get<DataCollection>(`${this._chartEndPoint}/basicData`);
   }
 }
